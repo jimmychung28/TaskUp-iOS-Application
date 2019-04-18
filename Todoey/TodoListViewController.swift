@@ -11,15 +11,13 @@ import UIKit
 class TodoListViewController: UITableViewController {
 
     var itemArray=[String]()
-    
+    let defaults=UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        if let item=defaults.array(forKey: "TodoListArray")as?[String]{
+            itemArray=item
+        }
     }
 
     // MARK: - Table view data source
@@ -62,8 +60,10 @@ class TodoListViewController: UITableViewController {
         var textField=UITextField()
         let alert=UIAlertController(title: "Add new Todoey Item", message: "", preferredStyle: .alert)
         let action=UIAlertAction(title: "Add Item", style: .default) { (action) in
+           
            self.itemArray.append(textField.text!)
-        self.tableView.reloadData()
+            self.defaults.set(self.itemArray,forKey:"TodoListArray" )
+           self.tableView.reloadData()
         }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new item"
