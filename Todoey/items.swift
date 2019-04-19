@@ -8,7 +8,7 @@
 
 import Foundation
 
-class item{
+class item: Encodable,Decodable{
     var title=""
     var done=false
 }

@@ -11,13 +11,14 @@ import UIKit
 class TodoListViewController: UITableViewController {
 
     var itemArray=[item]()
-    let defaults=UserDefaults.standard
+    let dataFilePath=FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let item=defaults.array(forKey: "TodoListArray")as?[item]{
-            itemArray=item
-        }
+//        if let item=defaults.array(forKey: "TodoListArray")as?[item]{
+//            itemArray=item
+//        }
+        loadItems()
     }
 
     // MARK: - Table view data source
@@ -48,7 +49,7 @@ class TodoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        // print(itemArray[indexPath.row])
         self.itemArray[indexPath.row].done = !self.itemArray[indexPath.row].done
-  
+        self.saveItems()
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
     }
@@ -63,8 +64,7 @@ class TodoListViewController: UITableViewController {
            let newItem=item()
             newItem.title=textField.text!
            self.itemArray.append(newItem)
-            self.defaults.set(self.itemArray,forKey:"TodoListArray" )
-           self.tableView.reloadData()
+            self.saveItems()
         }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new item"
@@ -72,5 +72,26 @@ class TodoListViewController: UITableViewController {
         }
         alert.addAction(action)
         present(alert,animated: true,completion: nil)
+    }
+    
+    func saveItems(){
+        let encoder=PropertyListEncoder()
+        do{
+            let data = try encoder.encode(itemArray)
+            try data.write(to: dataFilePath!)
+        }catch{
+            print("Error encoding item array,\(error)")
+        }
+        self.tableView.reloadData()
+    }
+    func loadItems(){
+        if let data=try? Data(contentsOf: dataFilePath!){
+            let decoder=PropertyListDecoder()
+            do{
+            itemArray=try decoder.decode([item].self, from: data)
+            }catch{
+                print("Error decoding item array,\(error)")
+            }
+        }
     }
 }
