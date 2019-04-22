@@ -12,6 +12,7 @@ import ChameleonFramework
 class TodoListViewController: SwipeTableViewController{
        let realm = try! Realm()
     var todoItems:Results<Item>?
+    @IBOutlet weak var searchBar: UISearchBar!
     var selectedCategory: Category? {
         didSet{
            loadItems()
@@ -23,11 +24,33 @@ class TodoListViewController: SwipeTableViewController{
         super.viewDidLoad()
 
         tableView.separatorStyle = .none
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+  
+       
+       
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        guard let colour=selectedCategory?.backgroundColor else{fatalError()}
+       
+        updateNavBar(withHexCode: colour)
+        title=selectedCategory?.name
+          
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+  
+        updateNavBar(withHexCode: "1D9BF6")
     }
 
     // MARK: - Table view data source
+    func updateNavBar(withHexCode colourHexCode:String){
+         guard let navBar=navigationController?.navigationBar else{fatalError("No navigation controller")}
+        guard let navBarColour=UIColor(hexString:colourHexCode)else{fatalError()}
+        navBar.barTintColor=navBarColour
+        navBar.tintColor=ContrastColorOf(navBarColour, returnFlat: true)
+        navBar.largeTitleTextAttributes=[NSAttributedString.Key.foregroundColor:ContrastColorOf(navBarColour, returnFlat: true)]
+        searchBar.barTintColor=navBarColour
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
