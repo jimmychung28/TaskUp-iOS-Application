@@ -8,7 +8,8 @@
 
 import UIKit
 import RealmSwift
-class CategoryViewController: UITableViewController {
+import ChameleonFramework
+class CategoryViewController: SwipeTableViewController{
     
     let realm = try! Realm()
     var categoryArray: Results<Category>?
@@ -17,7 +18,9 @@ class CategoryViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories()
+        tableView.separatorStyle = .none
         
+       
     }
 
 
@@ -27,6 +30,7 @@ class CategoryViewController: UITableViewController {
         let action=UIAlertAction(title: "Add Item", style: .default) { (action) in
             let newCategory=Category()
             newCategory.name=textField.text!
+            newCategory.backgroundColor=UIColor.randomFlat.hexValue()
             self.saveCategories(category: newCategory)
         }
         alert.addTextField { (alertTextField) in
@@ -47,10 +51,12 @@ class CategoryViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell {
-        let cell=tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
+        let cell=super.tableView(tableView, cellForRowAt: indexPath)
       
         cell.textLabel?.text=categoryArray?[indexPath.row].name ?? "No Categories Added"
+        
+        cell.backgroundColor=UIColor(hexString: categoryArray?[indexPath.row].backgroundColor ?? "ffffff")
       
         return cell
     }
@@ -85,4 +91,19 @@ class CategoryViewController: UITableViewController {
             destinationVC.selectedCategory = categoryArray?[indexPath.row]
         }
     }
+    
+    override func updateModel(at indexPath: IndexPath) {
+                if let categoryForDeletion=self.categoryArray?[indexPath.row]{
+                    do{
+                         try realm.write {
+                                realm.delete(categoryForDeletion.items)
+                               realm.delete(categoryForDeletion)
+                            }
+                        }catch{
+                           print("Error deleting category,\(error)")
+                        }
+                   }
+    }
 }
+
+
