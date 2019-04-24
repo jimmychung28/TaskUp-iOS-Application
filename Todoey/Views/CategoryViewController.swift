@@ -14,11 +14,11 @@ class CategoryViewController: SwipeTableViewController{
     
     let realm = try! Realm()
     var categoryArray: Results<Category>?
-    
+    var center=UNUserNotificationCenter.current()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let center=UNUserNotificationCenter.current()
+        
         center.requestAuthorization(options: [.alert,.sound]) { (granted, error) in
             
         }
@@ -42,7 +42,9 @@ class CategoryViewController: SwipeTableViewController{
             alertTextField.placeholder="Create new Category"
             textField=alertTextField
         }
+         let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
         alert.addAction(action)
+        alert.addAction(cancel)
         present(alert,animated: true,completion:nil)
     }
     
@@ -94,6 +96,7 @@ class CategoryViewController: SwipeTableViewController{
         
         if let indexPath=tableView.indexPathForSelectedRow{
             destinationVC.selectedCategory = categoryArray?[indexPath.row]
+            destinationVC.center=center
         }
     }
     

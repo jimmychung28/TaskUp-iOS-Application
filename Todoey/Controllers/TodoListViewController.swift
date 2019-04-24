@@ -9,12 +9,14 @@
 import UIKit
 import RealmSwift
 import ChameleonFramework
+import UserNotifications
 class TodoListViewController: SwipeTableViewController{
     let realm = try! Realm()
     var todoItems:Results<Item>?
     var datePicker=UIDatePicker()
     var dateField:UITextField?
     @IBOutlet weak var searchBar: UISearchBar!
+    var center:UNUserNotificationCenter?
     var selectedCategory: Category? {
         didSet{
            loadItems()
@@ -73,7 +75,7 @@ class TodoListViewController: SwipeTableViewController{
         
         if let item=todoItems?[indexPath.row]{
             cell.textLabel?.text=item.title
-            cell.detailTextLabel?.text=dateFormatter.string(from:datePicker.date)
+            cell.detailTextLabel?.text=dateFormatter.string(from:item.dateDeadline!)
             let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: cell.textLabel!.text!)
             if item.done == true {
                 cell.accessoryType = .checkmark
@@ -139,7 +141,14 @@ class TodoListViewController: SwipeTableViewController{
                 }catch{
                     print("Error saving new items, \(error)")
                 }
-               
+                let notification=UNMutableNotificationContent()
+                notification.title=textField.text!
+                let dateComponents=Calendar.current.dateComponents(([.year,.month,.day,.hour,.minute]), from: self.datePicker.date)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: notification, trigger: trigger)
+                self.center?.add(request, withCompletionHandler: { (error) in
+                    
+                })
             }
            
             self.tableView.reloadData()
