@@ -1,6 +1,5 @@
 //
 //  Item.swift
-//  Todoey
 //
 //  Created by Jimmy Chung on 2019-04-20.
 //  Copyright © 2019 Jimmy Chung. All rights reserved.
@@ -14,5 +13,6 @@ class Item: Object {
     @objc dynamic var done: Bool=false
     @objc dynamic var dateCreated: Date?
     @objc dynamic var dateDeadline: Date?
+    @objc dynamic var notificationID: String?
     var parentCategory=LinkingObjects(fromType: Category.self, property: "items")
 }

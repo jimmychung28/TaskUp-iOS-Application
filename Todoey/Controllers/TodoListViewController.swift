@@ -1,6 +1,5 @@
 //
 //  TodoListViewController.swift
-//  Todoey
 //
 //  Created by Jimmy Chung on 2019-04-17.
 //  Copyright © 2019 Jimmy Chung. All rights reserved.
@@ -15,6 +14,7 @@ class TodoListViewController: SwipeTableViewController{
     var todoItems:Results<Item>?
     var datePicker=UIDatePicker()
     var dateField:UITextField?
+    var textField=UITextField()
     @IBOutlet weak var searchBar: UISearchBar!
     var center:UNUserNotificationCenter?
     var selectedCategory: Category? {
@@ -48,7 +48,7 @@ class TodoListViewController: SwipeTableViewController{
 
     // MARK: - Table view data source
     func updateNavBar(withHexCode colourHexCode:String){
-         guard let navBar=navigationController?.navigationBar else{fatalError("No navigation controller")}
+        guard let navBar=navigationController?.navigationBar else{fatalError("No navigation controller")}
         guard let navBarColour=UIColor(hexString:colourHexCode)else{fatalError()}
         navBar.barTintColor=navBarColour
         navBar.tintColor=ContrastColorOf(navBarColour, returnFlat: true)
@@ -57,12 +57,11 @@ class TodoListViewController: SwipeTableViewController{
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         return todoItems?.count ?? 1
     }
 
@@ -75,7 +74,9 @@ class TodoListViewController: SwipeTableViewController{
         
         if let item=todoItems?[indexPath.row]{
             cell.textLabel?.text=item.title
-            cell.detailTextLabel?.text=dateFormatter.string(from:item.dateDeadline!)
+            if let deadline=item.dateDeadline{
+                cell.detailTextLabel?.text=dateFormatter.string(from:deadline)
+            }
             let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: cell.textLabel!.text!)
             if item.done == true {
                 cell.accessoryType = .checkmark
@@ -103,52 +104,61 @@ class TodoListViewController: SwipeTableViewController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        // print(itemArray[indexPath.row])
         if let item=todoItems?[indexPath.row]{
-            do{
+               do{
                 try realm.write {
                     item.done = !item.done
+                }
+                if let id=item.notificationID{
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
                 }
             }catch{
                 print("Error saving done status \(error)")
             }
            
         }
-//        context.delete(itemArray[indexPath.row])
-//         itemArray.remove(at: indexPath.row)
-//       self.todoItems[indexPath.row].done = !self.todoItems[indexPath.row].done
-//        self.saveItems()
+
           tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
       
     }
-    
+   //Mark - Notification
+    func addNotification(identifier: String){
+        let notification=UNMutableNotificationContent()
+        notification.title=textField.text!
+        let dateComponents=Calendar.current.dateComponents(([.year,.month,.day,.hour,.minute]), from: self.datePicker.date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        let request = UNNotificationRequest(identifier: identifier, content: notification, trigger: trigger)
+        self.center?.add(request, withCompletionHandler: { (error) in })
+    }
 
  //Mark - Add New Items
 
 
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-        var textField=UITextField()
-        let alert=UIAlertController(title: "Add new Todoey Item", message: "", preferredStyle: .alert)
+        let alert=UIAlertController(title: "Add new TaskUp Item", message: "", preferredStyle: .alert)
         let action=UIAlertAction(title: "Add Item", style: .default) { (action) in
             if let currentCategory=self.selectedCategory{
                 do{
                     try self.realm.write {
                         let newItem=Item()
-                        newItem.title=textField.text!
+                        newItem.title=self.textField.text!
                         newItem.dateCreated=Date()
-                        newItem.dateDeadline=self.datePicker.date
+                        if self.dateField?.text != ""{
+                            newItem.dateDeadline=self.datePicker.date
+                            let notificationIdentifier=UUID().uuidString
+                            newItem.notificationID=notificationIdentifier
+                            self.addNotification(identifier: notificationIdentifier)
+                        }else {
+                            newItem.dateDeadline=nil
+                            print("hi")
+                        }
+                        
                         currentCategory.items.append(newItem)
                     }
                 }catch{
                     print("Error saving new items, \(error)")
                 }
-                let notification=UNMutableNotificationContent()
-                notification.title=textField.text!
-                let dateComponents=Calendar.current.dateComponents(([.year,.month,.day,.hour,.minute]), from: self.datePicker.date)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                let request = UNNotificationRequest(identifier: UUID().uuidString, content: notification, trigger: trigger)
-                self.center?.add(request, withCompletionHandler: { (error) in
-                    
-                })
+                
             }
            
             self.tableView.reloadData()
@@ -156,7 +166,7 @@ class TodoListViewController: SwipeTableViewController{
         let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new task"
-            textField=alertTextField
+            self.textField=alertTextField
         }
         alert.addTextField { (alertDateField) in
             alertDateField.placeholder = "Date to complete task"
@@ -191,6 +201,9 @@ class TodoListViewController: SwipeTableViewController{
     
     override func updateModel(at indexPath: IndexPath) {
         if let item=todoItems?[indexPath.row]{
+            if let id=item.notificationID {
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+            }
             do{
                 try realm.write {
                     realm.delete(item)

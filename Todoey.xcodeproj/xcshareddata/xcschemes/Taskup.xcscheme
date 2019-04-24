@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9A6048A3AFBEB6D8B8FD25D6BFF9E257"
-               BuildableName = "Realm.framework"
-               BlueprintName = "Realm"
-               ReferencedContainer = "container:Pods.xcodeproj">
+               BlueprintIdentifier = "17CFD1BB2267F2CE008180CA"
+               BuildableName = "Todoey.app"
+               BlueprintName = "Todoey"
+               ReferencedContainer = "container:Todoey.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "17CFD1BB2267F2CE008180CA"
+            BuildableName = "Todoey.app"
+            BlueprintName = "Todoey"
+            ReferencedContainer = "container:Todoey.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9A6048A3AFBEB6D8B8FD25D6BFF9E257"
-            BuildableName = "Realm.framework"
-            BlueprintName = "Realm"
-            ReferencedContainer = "container:Pods.xcodeproj">
+            BlueprintIdentifier = "17CFD1BB2267F2CE008180CA"
+            BuildableName = "Todoey.app"
+            BlueprintName = "Todoey"
+            ReferencedContainer = "container:Todoey.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,6 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "17CFD1BB2267F2CE008180CA"
+            BuildableName = "Todoey.app"
+            BlueprintName = "Todoey"
+            ReferencedContainer = "container:Todoey.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

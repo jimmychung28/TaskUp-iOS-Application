@@ -1,6 +1,5 @@
 //
 //  SwipeTableViewController.swift
-//  Todoey
 //
 //  Created by Jimmy Chung on 2019-04-21.
 //  Copyright © 2019 Jimmy Chung. All rights reserved.

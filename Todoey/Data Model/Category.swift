@@ -1,6 +1,5 @@
 //
 //  Category.swift
-//  Todoey
 //
 //  Created by Jimmy Chung on 2019-04-20.
 //  Copyright © 2019 Jimmy Chung. All rights reserved.

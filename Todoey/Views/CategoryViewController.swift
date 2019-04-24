@@ -1,6 +1,5 @@
 //
 //  CategoryViewController.swift
-//  Todoey
 //
 //  Created by Jimmy Chung on 2019-04-19.
 //  Copyright © 2019 Jimmy Chung. All rights reserved.
@@ -32,7 +31,7 @@ class CategoryViewController: SwipeTableViewController{
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField=UITextField()
         let alert=UIAlertController(title: "Add Category", message: "", preferredStyle: .alert)
-        let action=UIAlertAction(title: "Add Item", style: .default) { (action) in
+        let action=UIAlertAction(title: "Add Category", style: .default) { (action) in
             let newCategory=Category()
             newCategory.name=textField.text!
             newCategory.backgroundColor=UIColor.randomFlat.hexValue()
@@ -64,7 +63,7 @@ class CategoryViewController: SwipeTableViewController{
         cell.textLabel?.text=categoryArray?[indexPath.row].name ?? "No Categories Added"
        
         cell.backgroundColor=UIColor(hexString: categoryArray?[indexPath.row].backgroundColor ?? "ffffff")
-       cell.textLabel?.textColor = ContrastColorOf(UIColor(hexString: categoryArray?[indexPath.row].backgroundColor ?? "ffffff")!, returnFlat: true)
+        cell.textLabel?.textColor = ContrastColorOf(UIColor(hexString: categoryArray?[indexPath.row].backgroundColor ?? "ffffff")!, returnFlat: true)
         return cell
     }
     
