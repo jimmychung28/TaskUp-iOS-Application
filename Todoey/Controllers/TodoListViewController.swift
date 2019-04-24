@@ -10,8 +10,10 @@ import UIKit
 import RealmSwift
 import ChameleonFramework
 class TodoListViewController: SwipeTableViewController{
-       let realm = try! Realm()
+    let realm = try! Realm()
     var todoItems:Results<Item>?
+    var datePicker=UIDatePicker()
+    var dateField:UITextField?
     @IBOutlet weak var searchBar: UISearchBar!
     var selectedCategory: Category? {
         didSet{
@@ -65,15 +67,29 @@ class TodoListViewController: SwipeTableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell=super.tableView(tableView, cellForRowAt: indexPath)
-
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy h:mm a"
         // Configure the cell...
         
         if let item=todoItems?[indexPath.row]{
             cell.textLabel?.text=item.title
-            cell.accessoryType = item.done ? .checkmark : .none
-            if let colour=UIColor(hexString: selectedCategory!.backgroundColor)?.darken(byPercentage: CGFloat(indexPath.row)/CGFloat(todoItems!.count)){
+            cell.detailTextLabel?.text=dateFormatter.string(from:datePicker.date)
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: cell.textLabel!.text!)
+            if item.done == true {
+                cell.accessoryType = .checkmark
+                 attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                cell.textLabel?.attributedText=attributeString
+                cell.detailTextLabel?.text=nil
+            }else if item.done == false{
+                cell.accessoryType = .none
+                attributeString.removeAttribute(NSAttributedString.Key.strikethroughStyle, range: NSMakeRange(0, attributeString.length))
+                cell.textLabel?.attributedText=attributeString
+            }
+       
+            if let colour=UIColor(hexString: selectedCategory!.backgroundColor)?.darken(byPercentage: 0.7*(CGFloat(indexPath.row)/CGFloat(todoItems!.count))){
                 cell.backgroundColor=colour
                 cell.textLabel?.textColor = ContrastColorOf(colour, returnFlat: true)
+                cell.detailTextLabel?.textColor = ContrastColorOf(colour, returnFlat: true)
             }
             
         }else{
@@ -106,6 +122,7 @@ class TodoListViewController: SwipeTableViewController{
 
  //Mark - Add New Items
 
+
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField=UITextField()
         let alert=UIAlertController(title: "Add new Todoey Item", message: "", preferredStyle: .alert)
@@ -115,7 +132,8 @@ class TodoListViewController: SwipeTableViewController{
                     try self.realm.write {
                         let newItem=Item()
                         newItem.title=textField.text!
-                        newItem.dataCreated=Date()
+                        newItem.dateCreated=Date()
+                        newItem.dateDeadline=self.datePicker.date
                         currentCategory.items.append(newItem)
                     }
                 }catch{
@@ -126,13 +144,35 @@ class TodoListViewController: SwipeTableViewController{
            
             self.tableView.reloadData()
         }
+        let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
         alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create new item"
+            alertTextField.placeholder = "Create new task"
             textField=alertTextField
         }
+        alert.addTextField { (alertDateField) in
+            alertDateField.placeholder = "Date to complete task"
+            self.datePicker.datePickerMode = .dateAndTime
+            self.dateField=alertDateField
+            
+            alertDateField.inputView = self.datePicker
+            self.datePicker.addTarget(self, action: #selector(self.dateChanged(datePicker:)), for: .valueChanged)
+        }
+       
         alert.addAction(action)
+        alert.addAction(cancel)
         present(alert,animated: true,completion: nil)
     }
+    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer){
+        view.endEditing(true)
+    }
+    @objc func dateChanged(datePicker: UIDatePicker){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy h:mm a"
+        
+        dateField?.text=dateFormatter.string(from:datePicker.date)
+        view.endEditing(true)
+    }
+   
     
 
     func loadItems(){
@@ -157,7 +197,7 @@ class TodoListViewController: SwipeTableViewController{
 extension TodoListViewController:UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        todoItems=todoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dataCreated", ascending: true)
+        todoItems=todoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
         tableView.reloadData()
 
     }

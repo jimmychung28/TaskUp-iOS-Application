@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import ChameleonFramework
+import UserNotifications
 class CategoryViewController: SwipeTableViewController{
     
     let realm = try! Realm()
@@ -17,6 +18,10 @@ class CategoryViewController: SwipeTableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let center=UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert,.sound]) { (granted, error) in
+            
+        }
         loadCategories()
         tableView.separatorStyle = .none
         
