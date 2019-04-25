@@ -68,9 +68,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lg-2e-QxQ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="2450"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zz1-gL-fBe">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zz1-gL-fBe">
                                                 <rect key="frame" x="140" y="18" width="95" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Privacy Policy">
                                                     <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -78,79 +77,107 @@
                                                     <action selector="privacyButton:" destination="jIO-X9-3pk" eventType="touchUpInside" id="Egf-vi-nbq"/>
                                                 </connections>
                                             </button>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 19.47.02-1" translatesAutoresizingMaskIntoConstraints="NO" id="D5L-sR-eav">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 19.47.02-1" translatesAutoresizingMaskIntoConstraints="NO" id="D5L-sR-eav">
                                                 <rect key="frame" x="-375" y="111" width="1125" height="270"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="AWi-ZX-jf3"/>
+                                                </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" fixedFrame="YES" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.15.19" translatesAutoresizingMaskIntoConstraints="NO" id="5Pr-lk-M81">
-                                                <rect key="frame" x="67" y="405" width="241" height="270"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.15.19" translatesAutoresizingMaskIntoConstraints="NO" id="5Pr-lk-M81">
+                                                <rect key="frame" x="-375" y="405" width="1125" height="270"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="aBK-hF-HWI"/>
+                                                </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" fixedFrame="YES" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.23.23" translatesAutoresizingMaskIntoConstraints="NO" id="imZ-bD-cnB">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.23.23" translatesAutoresizingMaskIntoConstraints="NO" id="imZ-bD-cnB">
                                                 <rect key="frame" x="-375" y="738" width="1125" height="270"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="HWY-hb-HSC"/>
+                                                </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" fixedFrame="YES" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.38.56" translatesAutoresizingMaskIntoConstraints="NO" id="cKR-J2-gfb">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.38.56" translatesAutoresizingMaskIntoConstraints="NO" id="cKR-J2-gfb">
                                                 <rect key="frame" x="-375" y="1064" width="1125" height="270"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="FhB-qb-AGZ"/>
+                                                </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" fixedFrame="YES" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.50.39" translatesAutoresizingMaskIntoConstraints="NO" id="9xe-ZO-Tzg">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.50.39" translatesAutoresizingMaskIntoConstraints="NO" id="9xe-ZO-Tzg">
                                                 <rect key="frame" x="-375" y="1360" width="1125" height="270"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="OOp-1j-pPi"/>
+                                                </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" fixedFrame="YES" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.43.25" translatesAutoresizingMaskIntoConstraints="NO" id="nbs-Aq-cic">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.43.25" translatesAutoresizingMaskIntoConstraints="NO" id="nbs-Aq-cic">
                                                 <rect key="frame" x="-375" y="1731" width="1125" height="270"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="I9O-1j-qGt"/>
+                                                </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" fixedFrame="YES" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.48.17 copy" translatesAutoresizingMaskIntoConstraints="NO" id="ygO-7X-J5w">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.48.17 copy" translatesAutoresizingMaskIntoConstraints="NO" id="ygO-7X-J5w">
                                                 <rect key="frame" x="-375" y="2102" width="1125" height="270"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="AnR-c8-eot"/>
+                                                    <constraint firstAttribute="width" constant="1125" id="Kok-e0-O7B"/>
+                                                </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJH-na-aQS">
-                                                <rect key="frame" x="107" y="56" width="161" height="29"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How To Add Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJH-na-aQS">
+                                                <rect key="frame" x="65.5" y="56" width="244" height="29"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Delete Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2p-XN-zWP">
-                                                <rect key="frame" x="102" y="696" width="171" height="27"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to Delete Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2p-XN-zWP">
+                                                <rect key="frame" x="66" y="696" width="243" height="27"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="27" id="qOL-AN-Sun"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGc-9Q-qk1">
-                                                <rect key="frame" x="140" y="1027" width="95" height="29"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How To Add Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGc-9Q-qk1">
+                                                <rect key="frame" x="93" y="1027" width="189" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="29" id="4ER-sV-jaU"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If date is selected for a task, there will be a reminder notification at that time!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ay5-Xa-Qan">
-                                                <rect key="frame" x="51" y="1638" width="282" height="53"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If date is selected for a task, there will be a reminder notification at that time!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ay5-Xa-Qan">
+                                                <rect key="frame" x="10.5" y="1638" width="354" height="53"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="53" id="H2z-2I-jbZ"/>
+                                                    <constraint firstAttribute="width" constant="354" id="kkO-W1-ewg"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crossing off Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qz-c8-jkT">
-                                                <rect key="frame" x="90" y="1691" width="205" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crossing off Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qz-c8-jkT">
+                                                <rect key="frame" x="85" y="1691" width="205" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="vLo-uR-UNn"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Selecting a task and crossing it off cancels the notification!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVf-tU-NzM">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selecting a task and crossing it off cancels the notification!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVf-tU-NzM">
                                                 <rect key="frame" x="45" y="1998" width="285" height="69"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="285" id="rWc-sj-Yap"/>
+                                                    <constraint firstAttribute="height" constant="69" id="xjl-Fg-1eU"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Delete Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVw-5d-sl8">
-                                                <rect key="frame" x="125" y="2064" width="136" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How To Delete Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVw-5d-sl8">
+                                                <rect key="frame" x="76.5" y="2064" width="222" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="Hpf-yZ-RgZ"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -162,7 +189,36 @@
                                         </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2450" id="1rF-bt-Ouo"/>
-                                            <constraint firstAttribute="width" constant="375" id="FmW-Am-Pez"/>
+                                            <constraint firstItem="XGc-9Q-qk1" firstAttribute="top" secondItem="imZ-bD-cnB" secondAttribute="bottom" constant="19" id="2df-fp-gSg"/>
+                                            <constraint firstItem="ygO-7X-J5w" firstAttribute="top" secondItem="OVw-5d-sl8" secondAttribute="bottom" constant="8" id="6cB-01-U8X"/>
+                                            <constraint firstItem="5qz-c8-jkT" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="84c-9t-lvY"/>
+                                            <constraint firstItem="OVw-5d-sl8" firstAttribute="top" secondItem="fVf-tU-NzM" secondAttribute="bottom" constant="-3" id="9js-ZC-V0d"/>
+                                            <constraint firstItem="fVf-tU-NzM" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="AWG-hj-crF"/>
+                                            <constraint firstItem="9xe-ZO-Tzg" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="Bhj-cU-CIs"/>
+                                            <constraint firstItem="cKR-J2-gfb" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="CJ2-L9-ZAm"/>
+                                            <constraint firstItem="D5L-sR-eav" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="EnH-Qy-jGP"/>
+                                            <constraint firstItem="cKR-J2-gfb" firstAttribute="top" secondItem="XGc-9Q-qk1" secondAttribute="bottom" constant="8" id="I5v-cG-RGe"/>
+                                            <constraint firstItem="imZ-bD-cnB" firstAttribute="top" secondItem="f2p-XN-zWP" secondAttribute="bottom" constant="15" id="KIq-8I-hfM"/>
+                                            <constraint firstItem="D5L-sR-eav" firstAttribute="top" secondItem="FJH-na-aQS" secondAttribute="bottom" constant="26" id="Lds-YA-dio"/>
+                                            <constraint firstItem="9xe-ZO-Tzg" firstAttribute="top" secondItem="cKR-J2-gfb" secondAttribute="bottom" constant="26" id="Lwa-6z-uiP"/>
+                                            <constraint firstItem="fVf-tU-NzM" firstAttribute="top" secondItem="nbs-Aq-cic" secondAttribute="bottom" constant="-3" id="Mzq-X6-FSX"/>
+                                            <constraint firstItem="FJH-na-aQS" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="N8y-dz-bWB"/>
+                                            <constraint firstItem="5qz-c8-jkT" firstAttribute="top" secondItem="ay5-Xa-Qan" secondAttribute="bottom" id="Od5-Mc-hjT"/>
+                                            <constraint firstItem="ygO-7X-J5w" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="TCV-vo-rhw"/>
+                                            <constraint firstItem="FJH-na-aQS" firstAttribute="top" secondItem="zz1-gL-fBe" secondAttribute="bottom" constant="8" id="Ttf-pr-esu"/>
+                                            <constraint firstItem="ay5-Xa-Qan" firstAttribute="top" secondItem="9xe-ZO-Tzg" secondAttribute="bottom" constant="8" id="Vuf-VM-5ai"/>
+                                            <constraint firstItem="nbs-Aq-cic" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="f6m-9h-xnG"/>
+                                            <constraint firstItem="zz1-gL-fBe" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="gbp-qb-fnp"/>
+                                            <constraint firstItem="5Pr-lk-M81" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="jKc-rY-9cz"/>
+                                            <constraint firstItem="imZ-bD-cnB" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="mJg-I1-1sk"/>
+                                            <constraint firstItem="5Pr-lk-M81" firstAttribute="top" secondItem="D5L-sR-eav" secondAttribute="bottom" constant="24" id="n3d-oo-csA"/>
+                                            <constraint firstItem="nbs-Aq-cic" firstAttribute="top" secondItem="5qz-c8-jkT" secondAttribute="bottom" constant="8" id="o2a-Vc-crt"/>
+                                            <constraint firstItem="OVw-5d-sl8" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="oDM-eV-ZJx"/>
+                                            <constraint firstItem="ay5-Xa-Qan" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="rLf-wh-tCg"/>
+                                            <constraint firstItem="zz1-gL-fBe" firstAttribute="top" secondItem="6lg-2e-QxQ" secondAttribute="top" constant="18" id="rnc-au-sLS"/>
+                                            <constraint firstItem="XGc-9Q-qk1" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="tqK-rv-vei"/>
+                                            <constraint firstItem="f2p-XN-zWP" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="vCT-cx-vih"/>
+                                            <constraint firstItem="f2p-XN-zWP" firstAttribute="top" secondItem="5Pr-lk-M81" secondAttribute="bottom" constant="21" id="yel-Wi-TZs"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -171,6 +227,7 @@
                                     <constraint firstAttribute="trailing" secondItem="6lg-2e-QxQ" secondAttribute="trailing" id="Beg-dv-Z8j"/>
                                     <constraint firstItem="6lg-2e-QxQ" firstAttribute="leading" secondItem="P9k-W8-7O0" secondAttribute="leading" id="Eq9-Fx-ch3"/>
                                     <constraint firstItem="6lg-2e-QxQ" firstAttribute="top" secondItem="P9k-W8-7O0" secondAttribute="top" id="kwj-bH-yD3"/>
+                                    <constraint firstItem="6lg-2e-QxQ" firstAttribute="width" secondItem="P9k-W8-7O0" secondAttribute="width" id="l7S-hA-Wea"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
