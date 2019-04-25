@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,6 +34,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Taskup" id="Qx0-Y7-j0e">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="info" id="Qgc-IG-oo9">
+                            <connections>
+                                <action selector="InfoButtonPressed:" destination="WSG-XD-fea" id="8uG-lz-9Gi"/>
+                                <segue destination="jIO-X9-3pk" kind="show" identifier="InfoSegue" id="Kop-1Z-B9Y"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qLS-Mw-aKC">
                             <connections>
                                 <action selector="addButtonPressed:" destination="WSG-XD-fea" id="nXs-di-CZZ"/>
@@ -46,6 +53,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o1N-3A-esI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1726" y="133"/>
+        </scene>
+        <!--Info View Controller-->
+        <scene sceneID="ulb-dx-OwW">
+            <objects>
+                <viewController id="jIO-X9-3pk" customClass="InfoViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VRC-Ad-unZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="3000"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9k-W8-7O0">
+                                <rect key="frame" x="0.0" y="116" width="375" height="2884"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lg-2e-QxQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="3000"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zz1-gL-fBe">
+                                                <rect key="frame" x="125.5" y="18" width="124" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="124" id="brf-y6-Hm6"/>
+                                                </constraints>
+                                                <state key="normal" title="Privacy Policy">
+                                                    <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="privacyButton:" destination="jIO-X9-3pk" eventType="touchUpInside" id="Egf-vi-nbq"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="How To Add Task Categories" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f7e-Qw-1Fc">
+                                                <rect key="frame" x="56" y="56" width="263" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="OzZ-ME-lck"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5L-sR-eav">
+                                                <rect key="frame" x="67" y="111" width="240" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="f7e-Qw-1Fc" firstAttribute="centerX" secondItem="zz1-gL-fBe" secondAttribute="centerX" id="BWg-P2-n24"/>
+                                            <constraint firstItem="f7e-Qw-1Fc" firstAttribute="top" secondItem="zz1-gL-fBe" secondAttribute="bottom" constant="8" symbolic="YES" id="Ju0-fG-bcm"/>
+                                            <constraint firstItem="zz1-gL-fBe" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="SnA-04-vHx"/>
+                                            <constraint firstItem="f7e-Qw-1Fc" firstAttribute="leading" secondItem="6lg-2e-QxQ" secondAttribute="leading" constant="56" id="W0B-lK-qDh"/>
+                                            <constraint firstAttribute="height" constant="3000" id="aCi-ly-hzZ"/>
+                                            <constraint firstItem="zz1-gL-fBe" firstAttribute="top" secondItem="6lg-2e-QxQ" secondAttribute="top" constant="18" id="yWT-Sz-I2I"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6lg-2e-QxQ" secondAttribute="trailing" id="1Yf-Ng-uyf"/>
+                                    <constraint firstItem="6lg-2e-QxQ" firstAttribute="leading" secondItem="P9k-W8-7O0" secondAttribute="leading" id="2Mr-z9-Hfs"/>
+                                    <constraint firstItem="6lg-2e-QxQ" firstAttribute="top" secondItem="P9k-W8-7O0" secondAttribute="top" id="aFA-9v-sMQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="6lg-2e-QxQ" secondAttribute="bottom" id="sQZ-cQ-6z4"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="P9k-W8-7O0" firstAttribute="top" secondItem="9eE-BC-QAp" secondAttribute="top" id="UVu-c0-Ce1"/>
+                            <constraint firstItem="P9k-W8-7O0" firstAttribute="leading" secondItem="9eE-BC-QAp" secondAttribute="leading" id="ai7-iO-udP"/>
+                            <constraint firstItem="P9k-W8-7O0" firstAttribute="trailing" secondItem="9eE-BC-QAp" secondAttribute="trailing" id="biU-gF-gf9"/>
+                            <constraint firstItem="P9k-W8-7O0" firstAttribute="bottom" secondItem="9eE-BC-QAp" secondAttribute="bottom" id="ewm-q2-9bv"/>
+                            <constraint firstItem="6lg-2e-QxQ" firstAttribute="width" secondItem="VRC-Ad-unZ" secondAttribute="width" id="oC4-Fz-gRn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9eE-BC-QAp"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="3000"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yeF-ap-1Un" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2644" y="-1765.8170914542729"/>
         </scene>
         <!--Item-->
         <scene sceneID="cG8-aD-CLV">
@@ -133,5 +215,8 @@
             <point key="canvasLocation" x="853.60000000000002" y="132.68365817091455"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="info" width="30" height="30"/>
+    </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
