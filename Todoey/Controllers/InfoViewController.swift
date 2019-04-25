@@ -8,16 +8,24 @@
 
 import UIKit
 import SafariServices
-class InfoViewController: UIViewController {
+class InfoViewController: UIViewController,UIScrollViewDelegate {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        scrollView.delegate=self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        scrollView.addSubview(contentView)
+        scrollView.contentSize = contentView.frame.size
     }
     
 
     @IBAction func privacyButton(_ sender: Any) {
+        print("hello")
         let url=URL(string: "https://taskup.online")
         let safariVC=SFSafariViewController(url:url!)
         present(safariVC, animated: true, completion: nil)

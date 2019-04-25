@@ -71,7 +71,8 @@ class TodoListViewController: SwipeTableViewController{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy h:mm a"
         // Configure the cell...
-        
+        cell.textLabel?.minimumScaleFactor=0.5
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
         if let item=todoItems?[indexPath.row]{
             cell.textLabel?.text=item.title
             if let deadline=item.dateDeadline{
