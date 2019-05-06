@@ -75,6 +75,7 @@ class TodoListViewController: SwipeTableViewController{
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         if let item=todoItems?[indexPath.row]{
             cell.textLabel?.text=item.title
+             cell.detailTextLabel?.text=nil
             if let deadline=item.dateDeadline{
                 cell.detailTextLabel?.text=dateFormatter.string(from:deadline)
             }
@@ -141,20 +142,22 @@ class TodoListViewController: SwipeTableViewController{
             if let currentCategory=self.selectedCategory{
                 do{
                     try self.realm.write {
+                        if self.textField.text?.trimmingCharacters(in: .whitespaces).isEmpty != true{
                         let newItem=Item()
                         newItem.title=self.textField.text!
                         newItem.dateCreated=Date()
-                        if self.dateField?.text != ""{
+                        if self.dateField?.text?.isEmpty != true{
                             newItem.dateDeadline=self.datePicker.date
                             let notificationIdentifier=UUID().uuidString
                             newItem.notificationID=notificationIdentifier
                             self.addNotification(identifier: notificationIdentifier)
                         }else {
                             newItem.dateDeadline=nil
-                            print("hi")
+                          
                         }
                         
                         currentCategory.items.append(newItem)
+                    }
                     }
                 }catch{
                     print("Error saving new items, \(error)")

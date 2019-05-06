@@ -32,10 +32,13 @@ class CategoryViewController: SwipeTableViewController{
         var textField=UITextField()
         let alert=UIAlertController(title: "Add Category", message: "", preferredStyle: .alert)
         let action=UIAlertAction(title: "Add Category", style: .default) { (action) in
-            let newCategory=Category()
-            newCategory.name=textField.text!
-            newCategory.backgroundColor=UIColor.randomFlat.hexValue()
-            self.saveCategories(category: newCategory)
+            if textField.text?.trimmingCharacters(in: .whitespaces).isEmpty != true{
+                let newCategory=Category()
+                newCategory.name=textField.text!
+                newCategory.backgroundColor=UIColor.randomFlat.hexValue()
+                self.saveCategories(category: newCategory)
+            }
+            
         }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder="Create new Category"

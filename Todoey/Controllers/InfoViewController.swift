@@ -8,19 +8,14 @@
 
 import UIKit
 import SafariServices
-class InfoViewController: UIViewController,UIScrollViewDelegate {
+class InfoViewController: UIViewController{
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        scrollView.delegate=self
-    }
-    
-    override func viewDidLayoutSubviews() {
-        scrollView.addSubview(contentView)
-        scrollView.contentSize = contentView.frame.size
+        
     }
     
 
