@@ -217,6 +217,20 @@ class TodoListViewController: SwipeTableViewController{
             }
         }
     }
+    
+    override func editName(indexPath: IndexPath,text:String) {
+        if let itemForEditing=self.todoItems?[indexPath.row]{
+            
+            do{
+                try realm.write {
+                    itemForEditing.title=text;
+                    tableView.reloadData()
+                }
+            }catch{
+                print("Error changing item name,\(error)")
+            }
+        }
+    }
 
 }
 

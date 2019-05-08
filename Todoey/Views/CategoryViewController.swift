@@ -44,7 +44,7 @@ class CategoryViewController: SwipeTableViewController{
             alertTextField.placeholder="Create new Category"
             textField=alertTextField
         }
-         let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
+        let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
         alert.addAction(action)
         alert.addAction(cancel)
         present(alert,animated: true,completion:nil)
@@ -67,6 +67,7 @@ class CategoryViewController: SwipeTableViewController{
        
         cell.backgroundColor=UIColor(hexString: categoryArray?[indexPath.row].backgroundColor ?? "ffffff")
         cell.textLabel?.textColor = ContrastColorOf(UIColor(hexString: categoryArray?[indexPath.row].backgroundColor ?? "ffffff")!, returnFlat: true)
+        cell.accessoryType = .disclosureIndicator;
         return cell
     }
     
@@ -119,6 +120,19 @@ class CategoryViewController: SwipeTableViewController{
                            print("Error deleting category,\(error)")
                         }
                    }
+    }
+    override func editName(indexPath: IndexPath,text:String) {
+        if let categoryForEditing=self.categoryArray?[indexPath.row]{
+            
+            do{
+                try realm.write {
+                    categoryForEditing.name=text;
+                    tableView.reloadData()
+                }
+            }catch{
+                print("Error changing category name,\(error)")
+            }
+        }
     }
 }
 

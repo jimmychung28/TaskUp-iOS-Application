@@ -8,7 +8,7 @@
 import UIKit
 import SwipeCellKit
 class SwipeTableViewController: UITableViewController,SwipeTableViewCellDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
          tableView.rowHeight=80.0
@@ -26,23 +26,65 @@ class SwipeTableViewController: UITableViewController,SwipeTableViewCellDelegate
         guard orientation == .right else { return nil }
         
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-  
+            
             self.updateModel(at: indexPath)
 
             
         }
         
         deleteAction.image = UIImage(named: "delete-icon")
+        let editAction = SwipeAction(style: .destructive, title: "Edit") { action, indexPath in
+            let alert=UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            let changeColorAction=UIAlertAction(title: "Change Color", style: .default) { (action) in
+              
+                
+            }
+            let changeNameAction=UIAlertAction(title: "Change Name", style: .default) { (action) in
+                self.changeName(indexPath: indexPath);
+            }
+            let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
+            alert.addAction(changeColorAction)
+            alert.addAction(changeNameAction)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion:nil)
+            
+            
+            
+        }
         
-        return [deleteAction]
+        editAction.image = UIImage(named: "edit-icon")
+        editAction.backgroundColor = UIColor.lightGray
+        
+        return [deleteAction,editAction]
     }
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
         options.expansionStyle = .destructive
         return options
     }
-    
+
+    func changeName(indexPath: IndexPath){
+        var textField=UITextField();
+        let alert=UIAlertController(title: "Change Name:", message: nil, preferredStyle: .alert)
+        let action=UIAlertAction(title: "Confirm", style: .default) { (action) in
+            if textField.text?.trimmingCharacters(in: .whitespaces).isEmpty != true{
+                let text=textField.text
+                self.editName(indexPath: indexPath,text:text!)
+            }
+        }
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder="New name"
+            textField=alertTextField
+        }
+        let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
+        alert.addAction(action)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil);
+    }
     func updateModel(at indexPath: IndexPath){
+        
+    }
+    func editName(indexPath: IndexPath, text: String){
         
     }
 }
