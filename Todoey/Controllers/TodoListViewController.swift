@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 import ChameleonFramework
 import UserNotifications
+import SwipeCellKit
 class TodoListViewController: SwipeTableViewController{
     let realm = try! Realm()
     var todoItems:Results<Item>?
@@ -39,6 +40,35 @@ class TodoListViewController: SwipeTableViewController{
         title=selectedCategory?.name
           
         
+    }
+    override func addAction(indexPath: IndexPath) -> [SwipeAction] {
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            
+            self.updateModel(at: indexPath)
+            
+            
+        }
+        
+        deleteAction.image = UIImage(named: "delete-icon")
+        let editAction = SwipeAction(style: .destructive, title: "Edit") { action, indexPath in
+            let alert=UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            
+            let changeNameAction=UIAlertAction(title: "Change Name", style: .default) { (action) in
+                self.changeName(indexPath: indexPath);
+            }
+            let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
+            alert.addAction(changeNameAction)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion:nil)
+            
+            
+            
+        }
+        
+        editAction.image = UIImage(named: "edit-icon")
+        editAction.backgroundColor = UIColor.lightGray
+        
+        return [deleteAction,editAction]
     }
     
     override func viewWillDisappear(_ animated: Bool) {
