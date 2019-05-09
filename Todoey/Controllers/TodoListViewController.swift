@@ -52,11 +52,12 @@ class TodoListViewController: SwipeTableViewController{
         deleteAction.image = UIImage(named: "delete-icon")
         let editAction = SwipeAction(style: .destructive, title: "Edit") { action, indexPath in
             let alert=UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-            
+            let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
             let changeNameAction=UIAlertAction(title: "Change Name", style: .default) { (action) in
                 self.changeName(indexPath: indexPath);
             }
-            let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
+            
+         
             alert.addAction(changeNameAction)
             alert.addAction(cancel)
             self.present(alert,animated: true,completion:nil)

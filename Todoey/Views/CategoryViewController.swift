@@ -10,11 +10,28 @@ import RealmSwift
 import ChameleonFramework
 import UserNotifications
 import SwipeCellKit
-class CategoryViewController: SwipeTableViewController{
+class CategoryViewController: SwipeTableViewController,colorViewControllerDelegate{
+    func changeColor(color: UIColor,indexPath:IndexPath) {
+        print("good")
+        if let categoryForEditing=self.categoryArray?[indexPath.row]{
+            
+            do{
+                try realm.write {
+                    categoryForEditing.backgroundColor=color.hexString;
+                    print("\(color.hexString)")
+                }
+            }catch{
+                print("Error changing category color,\(error)")
+            }
+        }
+        tableView.reloadData()
+    }
+    
     
     let realm = try! Realm()
     var categoryArray: Results<Category>?
     var center=UNUserNotificationCenter.current()
+    var changeColorIndexPath:IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +124,14 @@ class CategoryViewController: SwipeTableViewController{
                 destinationVC.center=center
             }
         }
+        if segue.identifier=="colorSegue" {
+            let destinationVC=segue.destination as! colorViewController
+            print("helo")
+            destinationVC.delegate=self
+            destinationVC.path=changeColorIndexPath
+            
+            
+        }
         
     }
     override func addAction(indexPath: IndexPath) -> [SwipeAction] {
@@ -121,7 +146,8 @@ class CategoryViewController: SwipeTableViewController{
         let editAction = SwipeAction(style: .destructive, title: "Edit") { action, indexPath in
             let alert=UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             let changeColorAction=UIAlertAction(title: "Change Color", style: .default) { (action) in
-                
+                self.changeColorIndexPath=indexPath
+                self.performSegue(withIdentifier: "colorSegue", sender: self)
                 
             }
             let changeNameAction=UIAlertAction(title: "Change Name", style: .default) { (action) in
@@ -142,6 +168,7 @@ class CategoryViewController: SwipeTableViewController{
         
         return [deleteAction,editAction]
     }
+    
     
     
     override func updateModel(at indexPath: IndexPath) {
@@ -170,5 +197,46 @@ class CategoryViewController: SwipeTableViewController{
         }
     }
 }
+
+extension UIColor {
+    
+    convenience init(hexString: String) {
+        let hexString = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
+        let scanner = Scanner(string: hexString)
+        
+        if hexString.hasPrefix("#") {
+            scanner.scanLocation = 1
+        }
+        
+        var color: UInt32 = 0
+        scanner.scanHexInt32(&color)
+        
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        
+        self.init(red: red, green: green, blue: blue, alpha: 1)
+    }
+    
+    var hexString: String {
+        
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        let rgb: Int = (Int)(r * 255) << 16 | (Int)(g * 255) << 8 | (Int)(b * 255) << 0
+        
+        return String(format: "#%06x", rgb)
+    }
+}
+
 
 
