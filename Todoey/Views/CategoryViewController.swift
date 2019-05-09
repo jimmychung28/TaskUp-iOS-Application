@@ -42,8 +42,11 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
         loadCategories()
         tableView.separatorStyle = .none
         
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
        
     }
+
 
 
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {

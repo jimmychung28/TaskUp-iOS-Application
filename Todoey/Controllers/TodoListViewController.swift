@@ -169,7 +169,7 @@ class TodoListViewController: SwipeTableViewController{
 
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         let alert=UIAlertController(title: "Add new TaskUp Item", message: "", preferredStyle: .alert)
-        let action=UIAlertAction(title: "Add Item", style: .default) { (action) in
+        let action=UIAlertAction(title: "Add Task", style: .default) { (action) in
             if let currentCategory=self.selectedCategory{
                 do{
                     try self.realm.write {
@@ -191,7 +191,7 @@ class TodoListViewController: SwipeTableViewController{
                     }
                     }
                 }catch{
-                    print("Error saving new items, \(error)")
+                    print("Error saving new Task, \(error)")
                 }
                 
             }

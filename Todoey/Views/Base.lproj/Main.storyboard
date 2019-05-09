@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Taskup-->
+        <!--Categories-->
         <scene sceneID="YsZ-tA-pm1">
             <objects>
                 <tableViewController id="WSG-XD-fea" customClass="CategoryViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,7 +33,7 @@
                             <outlet property="delegate" destination="WSG-XD-fea" id="ykN-qs-E25"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Taskup" id="Qx0-Y7-j0e">
+                    <navigationItem key="navigationItem" title="Categories" id="Qx0-Y7-j0e">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="info" id="Qgc-IG-oo9">
                             <connections>
                                 <action selector="InfoButtonPressed:" destination="WSG-XD-fea" id="8uG-lz-9Gi"/>
@@ -60,14 +60,14 @@
             <objects>
                 <viewController id="jIO-X9-3pk" customClass="InfoViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VRC-Ad-unZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="2566"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="2866"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9k-W8-7O0">
-                                <rect key="frame" x="0.0" y="111" width="375" height="2455"/>
+                                <rect key="frame" x="0.0" y="111" width="375" height="2866"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lg-2e-QxQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2450"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2750"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zz1-gL-fBe">
                                                 <rect key="frame" x="140" y="18" width="95" height="30"/>
@@ -183,15 +183,33 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How To Edit Name or Category Color" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qg4-TN-YpH">
+                                                <rect key="frame" x="10.5" y="2380" width="354" height="66"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="354" id="i9B-dY-ytz"/>
+                                                    <constraint firstAttribute="height" constant="66" id="mLx-aQ-mgO"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-08 at 23.35.16 copy" translatesAutoresizingMaskIntoConstraints="NO" id="uSM-Jk-tf8">
+                                                <rect key="frame" x="67.5" y="2454" width="240" height="270"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="C5l-rs-2GH"/>
+                                                    <constraint firstAttribute="width" constant="240" id="ze0-2g-75K"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" notEnabled="YES"/>
                                         </accessibility>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2450" id="1rF-bt-Ouo"/>
+                                            <constraint firstAttribute="height" constant="2750" id="1rF-bt-Ouo"/>
                                             <constraint firstItem="XGc-9Q-qk1" firstAttribute="top" secondItem="imZ-bD-cnB" secondAttribute="bottom" constant="19" id="2df-fp-gSg"/>
                                             <constraint firstItem="ygO-7X-J5w" firstAttribute="top" secondItem="OVw-5d-sl8" secondAttribute="bottom" constant="8" id="6cB-01-U8X"/>
+                                            <constraint firstItem="uSM-Jk-tf8" firstAttribute="top" secondItem="qg4-TN-YpH" secondAttribute="bottom" constant="8" id="7wh-at-5Ct"/>
                                             <constraint firstItem="5qz-c8-jkT" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="84c-9t-lvY"/>
                                             <constraint firstItem="OVw-5d-sl8" firstAttribute="top" secondItem="fVf-tU-NzM" secondAttribute="bottom" constant="-3" id="9js-ZC-V0d"/>
                                             <constraint firstItem="fVf-tU-NzM" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="AWG-hj-crF"/>
@@ -205,9 +223,12 @@
                                             <constraint firstItem="fVf-tU-NzM" firstAttribute="top" secondItem="nbs-Aq-cic" secondAttribute="bottom" constant="-3" id="Mzq-X6-FSX"/>
                                             <constraint firstItem="FJH-na-aQS" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="N8y-dz-bWB"/>
                                             <constraint firstItem="5qz-c8-jkT" firstAttribute="top" secondItem="ay5-Xa-Qan" secondAttribute="bottom" id="Od5-Mc-hjT"/>
+                                            <constraint firstItem="qg4-TN-YpH" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="RCW-kE-kDo"/>
                                             <constraint firstItem="ygO-7X-J5w" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="TCV-vo-rhw"/>
                                             <constraint firstItem="FJH-na-aQS" firstAttribute="top" secondItem="zz1-gL-fBe" secondAttribute="bottom" constant="8" id="Ttf-pr-esu"/>
                                             <constraint firstItem="ay5-Xa-Qan" firstAttribute="top" secondItem="9xe-ZO-Tzg" secondAttribute="bottom" constant="8" id="Vuf-VM-5ai"/>
+                                            <constraint firstItem="uSM-Jk-tf8" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="YWO-vC-vo1"/>
+                                            <constraint firstItem="qg4-TN-YpH" firstAttribute="top" secondItem="ygO-7X-J5w" secondAttribute="bottom" constant="8" id="e4x-z3-UKu"/>
                                             <constraint firstItem="nbs-Aq-cic" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="f6m-9h-xnG"/>
                                             <constraint firstItem="zz1-gL-fBe" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="gbp-qb-fnp"/>
                                             <constraint firstItem="5Pr-lk-M81" firstAttribute="centerX" secondItem="6lg-2e-QxQ" secondAttribute="centerX" id="jKc-rY-9cz"/>
@@ -224,7 +245,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="6lg-2e-QxQ" secondAttribute="bottom" id="1J6-bd-gBH"/>
+                                    <constraint firstAttribute="bottom" secondItem="6lg-2e-QxQ" secondAttribute="bottom" constant="116" id="1J6-bd-gBH"/>
                                     <constraint firstAttribute="trailing" secondItem="6lg-2e-QxQ" secondAttribute="trailing" id="Beg-dv-Z8j"/>
                                     <constraint firstItem="6lg-2e-QxQ" firstAttribute="leading" secondItem="P9k-W8-7O0" secondAttribute="leading" id="Eq9-Fx-ch3"/>
                                     <constraint firstItem="6lg-2e-QxQ" firstAttribute="top" secondItem="P9k-W8-7O0" secondAttribute="top" id="kwj-bH-yD3"/>
@@ -237,11 +258,11 @@
                             <constraint firstItem="P9k-W8-7O0" firstAttribute="top" secondItem="9eE-BC-QAp" secondAttribute="top" id="nYh-DS-Nzb"/>
                             <constraint firstItem="P9k-W8-7O0" firstAttribute="leading" secondItem="9eE-BC-QAp" secondAttribute="leading" id="tMH-yY-g2S"/>
                             <constraint firstItem="P9k-W8-7O0" firstAttribute="trailing" secondItem="9eE-BC-QAp" secondAttribute="trailing" id="tbm-OT-aDh"/>
-                            <constraint firstItem="P9k-W8-7O0" firstAttribute="bottom" secondItem="9eE-BC-QAp" secondAttribute="bottom" id="xbi-b3-xo9"/>
+                            <constraint firstItem="P9k-W8-7O0" firstAttribute="bottom" secondItem="9eE-BC-QAp" secondAttribute="bottom" constant="111" id="xbi-b3-xo9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9eE-BC-QAp"/>
                     </view>
-                    <size key="freeformSize" width="375" height="2566"/>
+                    <size key="freeformSize" width="375" height="2866"/>
                     <connections>
                         <outlet property="contentView" destination="6lg-2e-QxQ" id="85V-8W-myF"/>
                         <outlet property="scrollView" destination="P9k-W8-7O0" id="PNw-cq-bPl"/>
@@ -249,9 +270,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yeF-ap-1Un" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2673" y="-1943"/>
+            <point key="canvasLocation" x="2672.8125" y="-1943.661971830986"/>
         </scene>
-        <!--Item-->
+        <!--Tasks-->
         <scene sceneID="cG8-aD-CLV">
             <objects>
                 <tableViewController id="pkE-88-d2U" customClass="TodoListViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
@@ -299,7 +320,7 @@
                             <outlet property="delegate" destination="pkE-88-d2U" id="5as-c0-x2G"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Item" id="lYl-qg-bnh">
+                    <navigationItem key="navigationItem" title="Tasks" id="lYl-qg-bnh">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="yxz-D5-dZ2">
                             <connections>
                                 <action selector="addButtonPressed:" destination="pkE-88-d2U" id="A5y-om-2ld"/>
@@ -376,6 +397,7 @@
         <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.50.39" width="1125" height="2436"/>
         <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.43.25" width="1125" height="2436"/>
         <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.48.17 copy" width="1125" height="2436"/>
+        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-08 at 23.35.16 copy" width="1242" height="2688"/>
         <image name="info" width="30" height="30"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
