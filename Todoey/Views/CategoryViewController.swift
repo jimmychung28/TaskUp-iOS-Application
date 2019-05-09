@@ -229,12 +229,13 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
     override func updateModel(at indexPath: IndexPath) {
         
                 if let categoryForDeletion=self.categoryArray?[indexPath.row]{
-                    for index in indexPath.row...self.categoryArray!.endIndex-1 {
-                        let object = categoryArray![index]
-                        object.order -= 1
-                    }
+                    
                     do{
                          try realm.write {
+                            for index in indexPath.row...self.categoryArray!.endIndex-1 {
+                                let object = categoryArray![index]
+                                object.order -= 1
+                            }
                                 realm.delete(categoryForDeletion.items)
                                realm.delete(categoryForDeletion)
                             }

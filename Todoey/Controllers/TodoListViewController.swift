@@ -290,15 +290,16 @@ class TodoListViewController: SwipeTableViewController{
     
     override func updateModel(at indexPath: IndexPath) {
         if let item=todoItems?[indexPath.row]{
-            for index in indexPath.row...self.todoItems!.endIndex-1 {
-                let object = todoItems![index]
-                object.order -= 1
-            }
+            
             if let id=item.notificationID {
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
             }
             do{
                 try realm.write {
+                    for index in indexPath.row...self.todoItems!.endIndex-1 {
+                        let object = todoItems![index]
+                        object.order -= 1
+                    }
                     realm.delete(item)
                 }
             }catch{

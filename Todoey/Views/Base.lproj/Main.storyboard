@@ -68,14 +68,14 @@
             <objects>
                 <viewController id="jIO-X9-3pk" customClass="InfoViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VRC-Ad-unZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="2866"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="3266"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9k-W8-7O0">
-                                <rect key="frame" x="0.0" y="111" width="375" height="2866"/>
+                                <rect key="frame" x="0.0" y="111" width="375" height="3566"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lg-2e-QxQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2750"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6lg-2e-QxQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="3150"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zz1-gL-fBe">
                                                 <rect key="frame" x="140" y="18" width="95" height="30"/>
@@ -86,8 +86,8 @@
                                                     <action selector="privacyButton:" destination="jIO-X9-3pk" eventType="touchUpInside" id="Egf-vi-nbq"/>
                                                 </connections>
                                             </button>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 19.47.02-1" translatesAutoresizingMaskIntoConstraints="NO" id="D5L-sR-eav">
-                                                <rect key="frame" x="-375" y="111" width="1125" height="270"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.26.35 copy" translatesAutoresizingMaskIntoConstraints="NO" id="D5L-sR-eav">
+                                                <rect key="frame" x="-123" y="111" width="621" height="270"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="AWi-ZX-jf3"/>
                                                 </constraints>
@@ -98,8 +98,8 @@
                                                     <constraint firstAttribute="height" constant="270" id="aBK-hF-HWI"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.23.23" translatesAutoresizingMaskIntoConstraints="NO" id="imZ-bD-cnB">
-                                                <rect key="frame" x="-375" y="738" width="1125" height="270"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.23.26 copy" translatesAutoresizingMaskIntoConstraints="NO" id="imZ-bD-cnB">
+                                                <rect key="frame" x="-433.5" y="738" width="1242" height="270"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="HWY-hb-HSC"/>
                                                 </constraints>
@@ -201,12 +201,23 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-08 at 23.35.16 copy" translatesAutoresizingMaskIntoConstraints="NO" id="uSM-Jk-tf8">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.09.29" translatesAutoresizingMaskIntoConstraints="NO" id="uSM-Jk-tf8">
                                                 <rect key="frame" x="67.5" y="2454" width="240" height="270"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="C5l-rs-2GH"/>
                                                     <constraint firstAttribute="width" constant="240" id="ze0-2g-75K"/>
                                                 </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How To Rearrange Categories or Tasks" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaL-fi-QzP">
+                                                <rect key="frame" x="39" y="2739" width="315" height="81"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.00.20 copy" translatesAutoresizingMaskIntoConstraints="NO" id="fu1-lS-R6J">
+                                                <rect key="frame" x="67" y="2828" width="240" height="270"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -214,7 +225,7 @@
                                             <accessibilityTraits key="traits" notEnabled="YES"/>
                                         </accessibility>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2750" id="1rF-bt-Ouo"/>
+                                            <constraint firstAttribute="height" constant="3050" id="1rF-bt-Ouo"/>
                                             <constraint firstItem="XGc-9Q-qk1" firstAttribute="top" secondItem="imZ-bD-cnB" secondAttribute="bottom" constant="19" id="2df-fp-gSg"/>
                                             <constraint firstItem="ygO-7X-J5w" firstAttribute="top" secondItem="OVw-5d-sl8" secondAttribute="bottom" constant="8" id="6cB-01-U8X"/>
                                             <constraint firstItem="uSM-Jk-tf8" firstAttribute="top" secondItem="qg4-TN-YpH" secondAttribute="bottom" constant="8" id="7wh-at-5Ct"/>
@@ -266,11 +277,11 @@
                             <constraint firstItem="P9k-W8-7O0" firstAttribute="top" secondItem="9eE-BC-QAp" secondAttribute="top" id="nYh-DS-Nzb"/>
                             <constraint firstItem="P9k-W8-7O0" firstAttribute="leading" secondItem="9eE-BC-QAp" secondAttribute="leading" id="tMH-yY-g2S"/>
                             <constraint firstItem="P9k-W8-7O0" firstAttribute="trailing" secondItem="9eE-BC-QAp" secondAttribute="trailing" id="tbm-OT-aDh"/>
-                            <constraint firstItem="P9k-W8-7O0" firstAttribute="bottom" secondItem="9eE-BC-QAp" secondAttribute="bottom" constant="111" id="xbi-b3-xo9"/>
+                            <constraint firstItem="P9k-W8-7O0" firstAttribute="bottom" secondItem="9eE-BC-QAp" secondAttribute="bottom" constant="411" id="xbi-b3-xo9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9eE-BC-QAp"/>
                     </view>
-                    <size key="freeformSize" width="375" height="2866"/>
+                    <size key="freeformSize" width="375" height="3266"/>
                     <connections>
                         <outlet property="contentView" destination="6lg-2e-QxQ" id="85V-8W-myF"/>
                         <outlet property="scrollView" destination="P9k-W8-7O0" id="PNw-cq-bPl"/>
@@ -278,7 +289,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yeF-ap-1Un" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2672.8125" y="-1943.661971830986"/>
+            <point key="canvasLocation" x="2665.3125" y="-2446.4788732394368"/>
         </scene>
         <!--Tasks-->
         <scene sceneID="cG8-aD-CLV">
@@ -406,14 +417,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 19.47.02-1" width="1125" height="2436"/>
         <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.15.19" width="1125" height="2436"/>
-        <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.23.23" width="1125" height="2436"/>
         <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.38.56" width="1125" height="2436"/>
         <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.50.39" width="1125" height="2436"/>
         <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.43.25" width="1125" height="2436"/>
         <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.48.17 copy" width="1125" height="2436"/>
-        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-08 at 23.35.16 copy" width="1242" height="2688"/>
+        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.00.20 copy" width="1242" height="2688"/>
+        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.09.29" width="1242" height="2688"/>
+        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.23.26 copy" width="1242" height="2688"/>
+        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.26.35 copy" width="621" height="1344"/>
         <image name="info" width="30" height="30"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
