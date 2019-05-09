@@ -12,4 +12,5 @@ class Category: Object {
     @objc dynamic var name:String=""
     let items = List<Item>()
     @objc dynamic var backgroundColor:String=""
+    @objc dynamic var order: Int=0
 }

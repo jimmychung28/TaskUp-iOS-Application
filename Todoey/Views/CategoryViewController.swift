@@ -27,11 +27,13 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
         tableView.reloadData()
     }
     
-    
+    var orderNumber=0;
     let realm = try! Realm()
     var categoryArray: Results<Category>?
     var center=UNUserNotificationCenter.current()
     var changeColorIndexPath:IndexPath?
+    
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +44,58 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
         loadCategories()
         tableView.separatorStyle = .none
         
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
        
     }
+    @IBAction func rearrangeButton(_ sender: UIBarButtonItem) {
+        self.tableView.isEditing = !self.tableView.isEditing
+        if (editButton.title=="Done"){
+            editButton.title="Rearrange"
+            editButton.style = .plain
+        }else{
+            editButton.title="Done"
+            editButton.style = .done
+        }
+        
+        
+    }
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
 
+        do{
+            try realm.write {
+                let sourceObject = categoryArray![sourceIndexPath.row]
+                let destinationObject = categoryArray![destinationIndexPath.row]
+                
+                let destinationObjectOrder = destinationObject.order
+                
+                if sourceIndexPath.row < destinationIndexPath.row {
+
+                    for index in sourceIndexPath.row...destinationIndexPath.row {
+                        let object = categoryArray![index]
+                        object.order -= 1
+                    }
+                } else {
+
+                    for index in (destinationIndexPath.row..<sourceIndexPath.row){
+                        let object = categoryArray![index]
+                        object.order += 1
+                    }
+                }
+
+                sourceObject.order = destinationObjectOrder
+            }
+        }catch{
+            print("Error reordering \(error)")
+        }
+        self.tableView.reloadData()
+    }
 
 
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -57,6 +106,8 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
                 let newCategory=Category()
                 newCategory.name=textField.text!
                 newCategory.backgroundColor=UIColor.randomFlat.hexValue()
+                newCategory.order=self.orderNumber
+                self.orderNumber+=1
                 self.saveCategories(category: newCategory)
             }
             
@@ -83,6 +134,7 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell {
         
         let cell=super.tableView(tableView, cellForRowAt: indexPath)
+        categoryArray = categoryArray?.sorted(byKeyPath: "order", ascending: true)
       
         cell.textLabel?.text=categoryArray?[indexPath.row].name ?? "No Categories Added"
        
@@ -175,7 +227,12 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
     
     
     override func updateModel(at indexPath: IndexPath) {
+        
                 if let categoryForDeletion=self.categoryArray?[indexPath.row]{
+                    for index in indexPath.row...self.categoryArray!.endIndex-1 {
+                        let object = categoryArray![index]
+                        object.order -= 1
+                    }
                     do{
                          try realm.write {
                                 realm.delete(categoryForDeletion.items)

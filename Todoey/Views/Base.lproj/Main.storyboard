@@ -34,19 +34,27 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Categories" id="Qx0-Y7-j0e">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="info" id="Qgc-IG-oo9">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="info" style="done" id="Qgc-IG-oo9">
                             <connections>
                                 <action selector="InfoButtonPressed:" destination="WSG-XD-fea" id="8uG-lz-9Gi"/>
                                 <segue destination="jIO-X9-3pk" kind="show" identifier="InfoSegue" id="Kop-1Z-B9Y"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="qLS-Mw-aKC">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="WSG-XD-fea" id="nXs-di-CZZ"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="qLS-Mw-aKC">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="WSG-XD-fea" id="nXs-di-CZZ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" style="plain" id="9xT-ri-83R">
+                                <connections>
+                                    <action selector="rearrangeButton:" destination="WSG-XD-fea" id="gho-qM-FMn"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="9xT-ri-83R" id="k9L-YZ-h7z"/>
                         <segue destination="pkE-88-d2U" kind="show" identifier="goToItems" id="iRM-Qs-4zT"/>
                         <segue destination="YiF-rM-B41" kind="presentation" identifier="colorSegue" id="Bih-gb-2Dj"/>
                     </connections>
