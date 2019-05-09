@@ -329,13 +329,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tasks" id="lYl-qg-bnh">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="yxz-D5-dZ2">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="pkE-88-d2U" id="A5y-om-2ld"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="yxz-D5-dZ2">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="pkE-88-d2U" id="A5y-om-2ld"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Rearrange" id="QDi-PY-nrk">
+                                <connections>
+                                    <action selector="rearrangeButton:" destination="pkE-88-d2U" id="IiA-g7-iEX"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="QDi-PY-nrk" id="RRd-1y-qCz"/>
                         <outlet property="searchBar" destination="34K-cR-XsB" id="WeL-qj-BB5"/>
                     </connections>
                 </tableViewController>

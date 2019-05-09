@@ -16,7 +16,9 @@ class TodoListViewController: SwipeTableViewController{
     var datePicker=UIDatePicker()
     var dateField:UITextField?
     var textField=UITextField()
+    var orderNumber=0;
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     var center:UNUserNotificationCenter?
     var selectedCategory: Category? {
         didSet{
@@ -24,7 +26,18 @@ class TodoListViewController: SwipeTableViewController{
         }
     }
   
- 
+    
+    @IBAction func rearrangeButton(_ sender: Any) {
+        self.tableView.isEditing = !self.tableView.isEditing
+        if (editButton.title=="Done"){
+            editButton.title="Rearrange"
+            editButton.style = .plain
+        }else{
+            editButton.title="Done"
+            editButton.style = .done
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -99,6 +112,7 @@ class TodoListViewController: SwipeTableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell=super.tableView(tableView, cellForRowAt: indexPath)
+         todoItems=todoItems?.sorted(byKeyPath: "order", ascending: true)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy h:mm a"
         // Configure the cell...
@@ -177,6 +191,8 @@ class TodoListViewController: SwipeTableViewController{
                         let newItem=Item()
                         newItem.title=self.textField.text!
                         newItem.dateCreated=Date()
+                        newItem.order=self.orderNumber
+                        self.orderNumber+=1
                         if self.dateField?.text?.isEmpty != true{
                             newItem.dateDeadline=self.datePicker.date
                             let notificationIdentifier=UUID().uuidString
@@ -226,6 +242,44 @@ class TodoListViewController: SwipeTableViewController{
         dateField?.text=dateFormatter.string(from:datePicker.date)
         view.endEditing(true)
     }
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        
+        do{
+            try realm.write {
+                let sourceObject = todoItems![sourceIndexPath.row]
+                let destinationObject = todoItems![destinationIndexPath.row]
+                
+                let destinationObjectOrder = destinationObject.order
+                
+                if sourceIndexPath.row < destinationIndexPath.row {
+                    
+                    for index in sourceIndexPath.row...destinationIndexPath.row {
+                        let object = todoItems![index]
+                        object.order -= 1
+                    }
+                } else {
+                    
+                    for index in (destinationIndexPath.row..<sourceIndexPath.row){
+                        let object = todoItems![index]
+                        object.order += 1
+                    }
+                }
+                
+                sourceObject.order = destinationObjectOrder
+            }
+        }catch{
+            print("Error reordering \(error)")
+        }
+        self.tableView.reloadData()
+    }
    
     
 
@@ -236,6 +290,10 @@ class TodoListViewController: SwipeTableViewController{
     
     override func updateModel(at indexPath: IndexPath) {
         if let item=todoItems?[indexPath.row]{
+            for index in indexPath.row...self.todoItems!.endIndex-1 {
+                let object = todoItems![index]
+                object.order -= 1
+            }
             if let id=item.notificationID {
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
             }
