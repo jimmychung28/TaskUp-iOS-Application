@@ -92,8 +92,8 @@
                                                     <constraint firstAttribute="height" constant="270" id="AWi-ZX-jf3"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.15.19" translatesAutoresizingMaskIntoConstraints="NO" id="5Pr-lk-M81">
-                                                <rect key="frame" x="-375" y="405" width="1125" height="270"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.30.31" translatesAutoresizingMaskIntoConstraints="NO" id="5Pr-lk-M81">
+                                                <rect key="frame" x="-433.5" y="405" width="1242" height="270"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="aBK-hF-HWI"/>
                                                 </constraints>
@@ -104,25 +104,25 @@
                                                     <constraint firstAttribute="height" constant="270" id="HWY-hb-HSC"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.38.56" translatesAutoresizingMaskIntoConstraints="NO" id="cKR-J2-gfb">
-                                                <rect key="frame" x="-375" y="1064" width="1125" height="270"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.35.15" translatesAutoresizingMaskIntoConstraints="NO" id="cKR-J2-gfb">
+                                                <rect key="frame" x="-433.5" y="1064" width="1242" height="270"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="FhB-qb-AGZ"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.50.39" translatesAutoresizingMaskIntoConstraints="NO" id="9xe-ZO-Tzg">
-                                                <rect key="frame" x="-375" y="1360" width="1125" height="270"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.55.42" translatesAutoresizingMaskIntoConstraints="NO" id="9xe-ZO-Tzg">
+                                                <rect key="frame" x="-433.5" y="1360" width="1242" height="270"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="OOp-1j-pPi"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.43.25" translatesAutoresizingMaskIntoConstraints="NO" id="nbs-Aq-cic">
-                                                <rect key="frame" x="-375" y="1731" width="1125" height="270"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.57.17" translatesAutoresizingMaskIntoConstraints="NO" id="nbs-Aq-cic">
+                                                <rect key="frame" x="-433.5" y="1731" width="1242" height="270"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="I9O-1j-qGt"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.48.17 copy" translatesAutoresizingMaskIntoConstraints="NO" id="ygO-7X-J5w">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.58.23 copy" translatesAutoresizingMaskIntoConstraints="NO" id="ygO-7X-J5w">
                                                 <rect key="frame" x="-375" y="2102" width="1125" height="270"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="AnR-c8-eot"/>
@@ -371,9 +371,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eh8-Xe-w97">
-                                <rect key="frame" x="253" y="20" width="51" height="39"/>
+                                <rect key="frame" x="237" y="20" width="67" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="Done">
+                                <state key="normal" title="Cancel">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -417,15 +417,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.15.19" width="1125" height="2436"/>
-        <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.38.56" width="1125" height="2436"/>
-        <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 22.50.39" width="1125" height="2436"/>
-        <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.43.25" width="1125" height="2436"/>
-        <image name="Simulator Screen Shot - iPhone X - 2019-04-24 at 23.48.17 copy" width="1125" height="2436"/>
         <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.00.20 copy" width="1242" height="2688"/>
         <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.09.29" width="1242" height="2688"/>
         <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.23.26 copy" width="1242" height="2688"/>
         <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.26.35 copy" width="621" height="1344"/>
+        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.30.31" width="1242" height="2688"/>
+        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.35.15" width="1242" height="2688"/>
+        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.55.42" width="1242" height="2688"/>
+        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.57.17" width="1242" height="2688"/>
+        <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.58.23 copy" width="1242" height="2688"/>
         <image name="info" width="30" height="30"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

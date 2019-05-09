@@ -12,13 +12,11 @@ import UserNotifications
 import SwipeCellKit
 class CategoryViewController: SwipeTableViewController,colorViewControllerDelegate{
     func changeColor(color: UIColor,indexPath:IndexPath) {
-        print("good")
         if let categoryForEditing=self.categoryArray?[indexPath.row]{
             
             do{
                 try realm.write {
                     categoryForEditing.backgroundColor=color.hexString;
-                    print("\(color.hexString)")
                 }
             }catch{
                 print("Error changing category color,\(error)")
@@ -181,7 +179,6 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
         }
         if segue.identifier=="colorSegue" {
             let destinationVC=segue.destination as! colorViewController
-            print("helo")
             destinationVC.delegate=self
             destinationVC.path=changeColorIndexPath
             
