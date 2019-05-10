@@ -7,6 +7,7 @@
 
 import UIKit
 import SwipeCellKit
+import UserNotifications
 class SwipeTableViewController: UITableViewController,SwipeTableViewCellDelegate {
     
     override func viewDidLoad() {
@@ -53,6 +54,7 @@ class SwipeTableViewController: UITableViewController,SwipeTableViewCellDelegate
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil);
     }
+   
     func updateModel(at indexPath: IndexPath){
         
     }

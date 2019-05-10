@@ -13,8 +13,6 @@ import SwipeCellKit
 class TodoListViewController: SwipeTableViewController{
     let realm = try! Realm()
     var todoItems:Results<Item>?
-    var datePicker=UIDatePicker()
-    var dateField:UITextField?
     var textField=UITextField()
     var orderNumber=0;
     @IBOutlet weak var searchBar: UISearchBar!
@@ -69,9 +67,13 @@ class TodoListViewController: SwipeTableViewController{
             let changeNameAction=UIAlertAction(title: "Change Name", style: .default) { (action) in
                 self.changeName(indexPath: indexPath);
             }
+            let changeDateAction=UIAlertAction(title: "Change Date", style: .default) { (action) in
+                self.changeDate(indexPath:indexPath)
+            }
             
          
             alert.addAction(changeNameAction)
+            alert.addAction(changeDateAction)
             alert.addAction(cancel)
             self.present(alert,animated: true,completion:nil)
             
@@ -209,6 +211,7 @@ class TodoListViewController: SwipeTableViewController{
                 }catch{
                     print("Error saving new Task, \(error)")
                 }
+                self.tableView.reloadData()
                 
             }
            
@@ -235,13 +238,7 @@ class TodoListViewController: SwipeTableViewController{
     @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer){
         view.endEditing(true)
     }
-    @objc func dateChanged(datePicker: UIDatePicker){
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy h:mm a"
-        
-        dateField?.text=dateFormatter.string(from:datePicker.date)
-        view.endEditing(true)
-    }
+    
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
@@ -279,6 +276,55 @@ class TodoListViewController: SwipeTableViewController{
             print("Error reordering \(error)")
         }
         self.tableView.reloadData()
+    }
+    
+    let datePicker=UIDatePicker()
+    var dateField: UITextField?
+    
+    func changeDate(indexPath:IndexPath){
+        let alert=UIAlertController(title: "Change Date:", message: nil, preferredStyle: .alert)
+        let action=UIAlertAction(title: "Confirm", style: .default) { (action) in
+            do{
+                try self.realm.write {
+                    if let id=self.todoItems![indexPath.row].notificationID{
+                        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+                    }
+                    if self.dateField?.text?.isEmpty != true{
+                        self.todoItems![indexPath.row].dateDeadline=self.datePicker.date
+                        let notificationIdentifier=UUID().uuidString
+                        self.todoItems![indexPath.row].notificationID=notificationIdentifier
+                        self.addNotification(identifier: notificationIdentifier)
+                    }else {
+                        self.todoItems![indexPath.row].dateDeadline=nil
+                        
+                    }
+                }
+            }catch{
+                print("Error saving new Task, \(error)")
+            }
+           self.tableView.reloadData()
+        }
+       
+        alert.addTextField { (alertDateField) in
+            alertDateField.placeholder = "New Date to complete task"
+            self.datePicker.datePickerMode = .dateAndTime
+            self.dateField=alertDateField
+            
+            alertDateField.inputView = self.datePicker
+            self.datePicker.addTarget(self, action: #selector(self.dateChanged(datePicker:)), for: .valueChanged)
+        }
+        let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
+        alert.addAction(action)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil);
+        
+    }
+    @objc func dateChanged(datePicker: UIDatePicker){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy h:mm a"
+        
+        dateField?.text=dateFormatter.string(from:datePicker.date)
+        view.endEditing(true)
     }
    
     
