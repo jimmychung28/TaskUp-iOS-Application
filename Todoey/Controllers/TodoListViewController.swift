@@ -171,9 +171,14 @@ class TodoListViewController: SwipeTableViewController{
       
     }
    //Mark - Notification
-    func addNotification(identifier: String){
+    func addNotification(identifier: String, indexPath:IndexPath?){
         let notification=UNMutableNotificationContent()
-        notification.title=textField.text!
+        notification.sound = .default
+        if let path=indexPath {
+            notification.title=todoItems![path.row].title
+        }else{
+            notification.title=textField.text!
+        }
         let dateComponents=Calendar.current.dateComponents(([.year,.month,.day,.hour,.minute]), from: self.datePicker.date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let request = UNNotificationRequest(identifier: identifier, content: notification, trigger: trigger)
@@ -199,7 +204,7 @@ class TodoListViewController: SwipeTableViewController{
                             newItem.dateDeadline=self.datePicker.date
                             let notificationIdentifier=UUID().uuidString
                             newItem.notificationID=notificationIdentifier
-                            self.addNotification(identifier: notificationIdentifier)
+                            self.addNotification(identifier: notificationIdentifier,indexPath: nil)
                         }else {
                             newItem.dateDeadline=nil
                           
@@ -293,7 +298,7 @@ class TodoListViewController: SwipeTableViewController{
                         self.todoItems![indexPath.row].dateDeadline=self.datePicker.date
                         let notificationIdentifier=UUID().uuidString
                         self.todoItems![indexPath.row].notificationID=notificationIdentifier
-                        self.addNotification(identifier: notificationIdentifier)
+                        self.addNotification(identifier: notificationIdentifier,indexPath:indexPath)
                     }else {
                         self.todoItems![indexPath.row].dateDeadline=nil
                         
