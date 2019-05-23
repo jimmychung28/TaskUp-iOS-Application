@@ -338,7 +338,7 @@ class TodoListViewController: SwipeTableViewController{
     func loadItems(){
         todoItems=selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
         tableView.reloadData()
-        text=UITextView(frame: CGRect(x: self.view.frame.size.width/2-(self.view.frame.size.width-50)/2, y: self.view.frame.size.height/2, width: self.view.frame.size.width-50, height: self.view.frame.size.width-50))
+        text=UITextView(frame: CGRect(x: self.view.frame.size.width/2-(self.view.frame.size.width-50)/2, y: self.view.frame.size.height/3, width: self.view.frame.size.width-50, height: self.view.frame.size.width-50))
         if todoItems?.isEmpty==true{
             text!.text="Add a new task using the + button"
             text!.textAlignment = .center

@@ -181,6 +181,7 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
     }
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.text?.removeFromSuperview()
         if segue.identifier=="goToItems"{
             let destinationVC = segue.destination as! TodoListViewController
             
