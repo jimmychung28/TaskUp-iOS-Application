@@ -14,6 +14,7 @@ class TodoListViewController: SwipeTableViewController{
     let realm = try! Realm()
     var todoItems:Results<Item>?
     var textField=UITextField()
+    var text:UITextView?
     var orderNumber=0;
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -217,10 +218,10 @@ class TodoListViewController: SwipeTableViewController{
                     print("Error saving new Task, \(error)")
                 }
                 self.tableView.reloadData()
-                
+                self.text?.removeFromSuperview()
             }
            
-            self.tableView.reloadData()
+           
         }
         let cancel=UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in})
         alert.addTextField { (alertTextField) in
@@ -337,6 +338,14 @@ class TodoListViewController: SwipeTableViewController{
     func loadItems(){
         todoItems=selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
         tableView.reloadData()
+        text=UITextView(frame: CGRect(x: self.view.frame.size.width/2-(self.view.frame.size.width-50)/2, y: self.view.frame.size.height/2, width: self.view.frame.size.width-50, height: self.view.frame.size.width-50))
+        if todoItems?.isEmpty==true{
+            text!.text="Add a new task using the + button"
+            text!.textAlignment = .center
+            text!.isEditable=false
+            text!.font = .systemFont(ofSize:30)
+            self.view.addSubview(text!)
+        }
       }
     
     override func updateModel(at indexPath: IndexPath) {
@@ -346,6 +355,7 @@ class TodoListViewController: SwipeTableViewController{
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
             }
             do{
+                
                 try realm.write {
                     for index in indexPath.row...self.todoItems!.endIndex-1 {
                         let object = todoItems![index]
@@ -355,6 +365,14 @@ class TodoListViewController: SwipeTableViewController{
                 }
             }catch{
                 print("Error deleting item,\(error)")
+            }
+            text=UITextView(frame: CGRect(x: self.view.frame.size.width/2-(self.view.frame.size.width-50)/2, y: self.view.frame.size.height/2, width: self.view.frame.size.width-50, height: self.view.frame.size.width-50))
+            if todoItems?.isEmpty==true{
+                text!.text="Add a new task using the + button"
+                text!.textAlignment = .center
+                text!.isEditable=false
+                text!.font = .systemFont(ofSize:30)
+                self.view.addSubview(text!)
             }
         }
     }
