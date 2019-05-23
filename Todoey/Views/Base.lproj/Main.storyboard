@@ -14,7 +14,7 @@
         <scene sceneID="YsZ-tA-pm1">
             <objects>
                 <tableViewController id="WSG-XD-fea" customClass="CategoryViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DZP-c0-iXT" customClass="Cate">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DZP-c0-iXT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -46,7 +46,7 @@
                                     <action selector="addButtonPressed:" destination="WSG-XD-fea" id="nXs-di-CZZ"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Edit" style="plain" id="9xT-ri-83R">
+                            <barButtonItem title="Rearrange" style="plain" id="9xT-ri-83R">
                                 <connections>
                                     <action selector="rearrangeButton:" destination="WSG-XD-fea" id="gho-qM-FMn"/>
                                 </connections>

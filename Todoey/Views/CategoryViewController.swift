@@ -30,6 +30,8 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
     var categoryArray: Results<Category>?
     var center=UNUserNotificationCenter.current()
     var changeColorIndexPath:IndexPath?
+    var text:UITextView?
+
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     
@@ -130,7 +132,9 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell {
-        
+        if let instruction=text {
+            instruction.removeFromSuperview()
+        }
         let cell=super.tableView(tableView, cellForRowAt: indexPath)
         categoryArray = categoryArray?.sorted(byKeyPath: "order", ascending: true)
       
@@ -157,6 +161,14 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
     func loadCategories(){
         categoryArray=realm.objects(Category.self)
         tableView.reloadData()
+        text=UITextView(frame: CGRect(x: self.view.frame.size.width/2-(self.view.frame.size.width-50)/2, y: self.view.frame.size.height/2, width: self.view.frame.size.width-50, height: self.view.frame.size.width-50))
+        if categoryArray?.isEmpty==true{
+            text!.text="Add a new category using the + button"
+            text!.textAlignment = .center
+            text!.isEditable=false
+            text!.font = .systemFont(ofSize:30)
+            self.navigationController?.view.addSubview(text!)
+        }
         
     }
     @IBAction func InfoButtonPressed(_ sender: UIBarButtonItem) {
@@ -235,6 +247,14 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
                             }
                                 realm.delete(categoryForDeletion.items)
                                realm.delete(categoryForDeletion)
+                            }
+                            text=UITextView(frame: CGRect(x: self.view.frame.size.width/2-(self.view.frame.size.width-50)/2, y: self.view.frame.size.height/2, width: self.view.frame.size.width-50, height: self.view.frame.size.width-50))
+                            if categoryArray?.isEmpty==true{
+                                text!.text="Add a new category using the + button"
+                                text!.textAlignment = .center
+                                text!.isEditable=false
+                                text!.font = .systemFont(ofSize:30)
+                                self.navigationController?.view.addSubview(text!)
                             }
                         }catch{
                            print("Error deleting category,\(error)")
