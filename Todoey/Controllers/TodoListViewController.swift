@@ -175,10 +175,11 @@ class TodoListViewController: SwipeTableViewController{
     func addNotification(identifier: String, indexPath:IndexPath?){
         let notification=UNMutableNotificationContent()
         notification.sound = .default
+        notification.title=selectedCategory!.name
         if let path=indexPath {
-            notification.title=todoItems![path.row].title
+            notification.body=todoItems![path.row].title
         }else{
-            notification.title=textField.text!
+            notification.body=textField.text!
         }
         let dateComponents=Calendar.current.dateComponents(([.year,.month,.day,.hour,.minute]), from: self.datePicker.date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
@@ -383,6 +384,12 @@ class TodoListViewController: SwipeTableViewController{
             do{
                 try realm.write {
                     itemForEditing.title=text;
+                    if let id=self.todoItems![indexPath.row].notificationID{
+                        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+                    }
+                    let notificationIdentifier=UUID().uuidString
+                    self.todoItems![indexPath.row].notificationID=notificationIdentifier
+                    self.addNotification(identifier: notificationIdentifier,indexPath:indexPath)
                     tableView.reloadData()
                 }
             }catch{
