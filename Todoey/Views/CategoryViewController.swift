@@ -35,6 +35,10 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     
+    override func viewDidAppear(_ animated: Bool) {
+        loadCategories();
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

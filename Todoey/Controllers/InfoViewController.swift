@@ -20,7 +20,6 @@ class InfoViewController: UIViewController{
     
 
     @IBAction func privacyButton(_ sender: Any) {
-        print("hello")
         let url=URL(string: "https://taskup.online")
         let safariVC=SFSafariViewController(url:url!)
         present(safariVC, animated: true, completion: nil)
