@@ -35,6 +35,9 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     
+
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         loadCategories();
     }
@@ -45,9 +48,17 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
         center.requestAuthorization(options: [.alert,.sound]) { (granted, error) in
             
         }
-        loadCategories()
+        //loadCategories()
         tableView.separatorStyle = .none
-        
+        if #available(iOS 13.0, *){
+            let app=UINavigationBarAppearance();
+            app.configureWithOpaqueBackground()
+            app.titleTextAttributes=[.foregroundColor:UIColor.white]
+            app.largeTitleTextAttributes=[.foregroundColor:UIColor.white]
+            app.backgroundColor=UIColor(hexString: "37A0FF")
+            self.navigationController?.navigationBar.standardAppearance=app;
+            self.navigationController?.navigationBar.scrollEdgeAppearance=app;
+        }
        
     }
     @IBAction func rearrangeButton(_ sender: UIBarButtonItem) {
@@ -109,7 +120,7 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
             if textField.text?.trimmingCharacters(in: .whitespaces).isEmpty != true{
                 let newCategory=Category()
                 newCategory.name=textField.text!
-                newCategory.backgroundColor=UIColor.randomFlat.hexValue()
+                newCategory.backgroundColor=UIColor.randomFlat().hexValue()
                 newCategory.order=self.orderNumber
                 self.orderNumber+=1
                 self.saveCategories(category: newCategory)

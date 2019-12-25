@@ -47,10 +47,8 @@ class TodoListViewController: SwipeTableViewController{
     }
     override func viewWillAppear(_ animated: Bool) {
         guard let colour=selectedCategory?.backgroundColor else{fatalError()}
-       
         updateNavBar(withHexCode: colour)
         title=selectedCategory?.name
-          
         
     }
     override func addAction(indexPath: IndexPath) -> [SwipeAction] {
@@ -97,10 +95,22 @@ class TodoListViewController: SwipeTableViewController{
     func updateNavBar(withHexCode colourHexCode:String){
         guard let navBar=navigationController?.navigationBar else{fatalError("No navigation controller")}
         guard let navBarColour=UIColor(hexString:colourHexCode)else{fatalError()}
-        navBar.barTintColor=navBarColour
+        guard let textFieldInsideSearchBar=searchBar.value(forKey: "searchField") as? UITextField else{fatalError()}
+        textFieldInsideSearchBar.backgroundColor=UIColor(hexString: "ffffff")
+        navBar.backgroundColor=navBarColour
         navBar.tintColor=ContrastColorOf(navBarColour, returnFlat: true)
         navBar.largeTitleTextAttributes=[NSAttributedString.Key.foregroundColor:ContrastColorOf(navBarColour, returnFlat: true)]
         searchBar.barTintColor=navBarColour
+        navBar.barTintColor=navBarColour
+        if #available(iOS 13.0, *){
+                   let app=UINavigationBarAppearance();
+                   app.configureWithOpaqueBackground()
+                   app.titleTextAttributes=[.foregroundColor:UIColor.white]
+                   app.largeTitleTextAttributes=[.foregroundColor:UIColor.white]
+                   app.backgroundColor=navBarColour
+                   self.navigationController?.navigationBar.standardAppearance=app;
+                   self.navigationController?.navigationBar.scrollEdgeAppearance=app;
+               }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
