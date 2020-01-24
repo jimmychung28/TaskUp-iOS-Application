@@ -925,14 +925,14 @@
             break;
         }
             
-        case kCGColorSpaceModelRGB:{
+        case kCGColorSpaceModelRGB: {
             rgba[0] = components[0];
             rgba[1] = components[1];
             rgba[2] = components[2];
             rgba[3] = components[3];
             break;
         }
-        case kCGColorSpaceModelXYZ:
+            
         case kCGColorSpaceModelCMYK:
         case kCGColorSpaceModelDeviceN:
         case kCGColorSpaceModelIndexed:
@@ -950,8 +950,6 @@
             rgba[3] = 1.0f;
             break;
         }
-        
-        
     }
 }
 

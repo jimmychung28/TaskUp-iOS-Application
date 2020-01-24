@@ -31,8 +31,6 @@ open class SwipeTableViewCell: UITableViewCell {
         return swipeController.panGestureRecognizer;
     }
     
-    
-    
     var swipeController: SwipeController!
     var isPreviouslySelected = false
     
