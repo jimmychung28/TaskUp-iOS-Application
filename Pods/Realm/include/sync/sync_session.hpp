@@ -284,10 +284,6 @@ public:
         {
             session.handle_error(std::move(error));
         }
-        static void nonsync_transact_notify(SyncSession& session, VersionID::version_type version)
-        {
-            session.nonsync_transact_notify(version);
-        }
     };
 
 private:
@@ -336,7 +332,7 @@ private:
     SyncSession(_impl::SyncClient&, std::string realm_path, SyncConfig, bool force_client_resync);
 
     void handle_error(SyncError);
-    void cancel_pending_waits(std::unique_lock<std::mutex>&, std::error_code);
+    void cancel_pending_waits(std::unique_lock<std::mutex>&);
     enum class ShouldBackup { yes, no };
     void update_error_and_mark_file_for_deletion(SyncError&, ShouldBackup);
     std::string get_recovery_file_path();

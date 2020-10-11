@@ -19,6 +19,44 @@
 import Foundation
 import Realm
 
+/// :nodoc:
+/// Internal class. Do not use directly. Used for reflection and initialization
+public class LinkingObjectsBase: NSObject, NSFastEnumeration {
+    internal let objectClassName: String
+    internal let propertyName: String
+
+    fileprivate var cachedRLMResults: RLMResults<AnyObject>?
+    @objc fileprivate var object: RLMWeakObjectHandle?
+    @objc fileprivate var property: RLMProperty?
+
+    internal var rlmResults: RLMResults<AnyObject> {
+        if cachedRLMResults == nil {
+            if let object = self.object, let property = self.property {
+                cachedRLMResults = RLMDynamicGet(object.object, property)! as? RLMResults
+                self.object = nil
+                self.property = nil
+            } else {
+                cachedRLMResults = RLMResults.emptyDetached()
+            }
+        }
+        return cachedRLMResults!
+    }
+
+    init(fromClassName objectClassName: String, property propertyName: String) {
+        self.objectClassName = objectClassName
+        self.propertyName = propertyName
+    }
+
+    // MARK: Fast Enumeration
+    public func countByEnumerating(with state: UnsafeMutablePointer<NSFastEnumerationState>,
+                                   objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>,
+                                   count len: Int) -> Int {
+        return Int(rlmResults.countByEnumerating(with: state,
+                                                 objects: buffer,
+                                                 count: UInt(len)))
+    }
+}
+
 /**
  `LinkingObjects` is an auto-updating container type. It represents zero or more objects that are linked to its owning
  model object through a property relationship.
@@ -33,7 +71,7 @@ import Realm
  `LinkingObjects` can only be used as a property on `Object` models. Properties of this type must be declared as `let`
  and cannot be `dynamic`.
  */
-public struct LinkingObjects<Element: Object> {
+public final class LinkingObjects<Element: Object>: LinkingObjectsBase {
     /// The type of the objects represented by the linking objects.
     public typealias ElementType = Element
 
@@ -61,16 +99,17 @@ public struct LinkingObjects<Element: Object> {
      - parameter type:         The type of the object owning the property the linking objects should refer to.
      - parameter propertyName: The property name of the property the linking objects should refer to.
      */
-    public init(fromType _: Element.Type, property propertyName: String) {
-        self.propertyName = propertyName
+    public init(fromType type: Element.Type, property propertyName: String) {
+        let className = (Element.self as Object.Type).className()
+        super.init(fromClassName: className, property: propertyName)
     }
 
     /// A human-readable description of the objects represented by the linking objects.
-    public var description: String {
+    public override var description: String {
         if realm == nil {
             var this = self
             return withUnsafePointer(to: &this) {
-                return "LinkingObjects<\(Element.className())> <\($0)> (\n\n)"
+                return "LinkingObjects<\(objectClassName)> <\($0)> (\n\n)"
             }
         }
         return RLMDescriptionWithMaxDepth("LinkingObjects", rlmResults, RLMDescriptionMaxDepth)
@@ -94,6 +133,16 @@ public struct LinkingObjects<Element: Object> {
      */
     public func index(matching predicate: NSPredicate) -> Int? {
         return notFoundToNil(index: rlmResults.indexOfObject(with: predicate))
+    }
+
+    /**
+     Returns the index of the first object matching the given predicate, or `nil` if no objects match.
+
+     - parameter predicateFormat: A predicate format string, optionally followed by a variable number of arguments.
+     */
+    public func index(matching predicateFormat: String, _ args: Any...) -> Int? {
+        return notFoundToNil(index: rlmResults.indexOfObject(with: NSPredicate(format: predicateFormat,
+                                                                               argumentArray: unwrapOptionals(in: args))))
     }
 
     // MARK: Object Retrieval
@@ -121,7 +170,7 @@ public struct LinkingObjects<Element: Object> {
 
      - parameter key: The name of the property whose values are desired.
      */
-    public func value(forKey key: String) -> Any? {
+    public override func value(forKey key: String) -> Any? {
         return value(forKeyPath: key)
     }
 
@@ -131,7 +180,7 @@ public struct LinkingObjects<Element: Object> {
 
      - parameter keyPath: The key path to the property whose values are desired.
      */
-    public func value(forKeyPath keyPath: String) -> Any? {
+    public override func value(forKeyPath keyPath: String) -> Any? {
         return rlmResults.value(forKeyPath: keyPath)
     }
 
@@ -143,11 +192,21 @@ public struct LinkingObjects<Element: Object> {
      - parameter value: The value to set the property to.
      - parameter key:   The name of the property whose value should be set on each object.
      */
-    public func setValue(_ value: Any?, forKey key: String) {
+    public override func setValue(_ value: Any?, forKey key: String) {
         return rlmResults.setValue(value, forKeyPath: key)
     }
 
     // MARK: Filtering
+
+    /**
+     Returns a `Results` containing all objects matching the given predicate in the linking objects.
+
+     - parameter predicateFormat: A predicate format string, optionally followed by a variable number of arguments.
+     */
+    public func filter(_ predicateFormat: String, _ args: Any...) -> Results<Element> {
+        return Results(rlmResults.objects(with: NSPredicate(format: predicateFormat,
+                                                            argumentArray: unwrapOptionals(in: args))))
+    }
 
     /**
      Returns a `Results` containing all objects matching the given predicate in the linking objects.
@@ -258,10 +317,9 @@ public struct LinkingObjects<Element: Object> {
      not perform a write transaction on the same thread or explicitly call `realm.refresh()`, accessing it will never
      perform blocking work.
 
-     If no queue is given, notifications are delivered via the standard run loop, and so can't be delivered while the
-     run loop is blocked by other activity. If a queue is given, notifications are delivered to that queue instead. When
-     notifications can't be delivered instantly, multiple notifications may be coalesced into a single notification.
-     This can include the notification with the initial collection.
+     Notifications are delivered via the standard run loop, and so can't be delivered while the run loop is blocked by
+     other activity. When notifications can't be delivered instantly, multiple notifications may be coalesced into a
+     single notification. This can include the notification with the initial collection.
 
      For example, the following code performs a write transaction immediately after adding the notification block, so
      there is no opportunity for the initial notification to be delivered first. As a result, the initial notification
@@ -296,55 +354,14 @@ public struct LinkingObjects<Element: Object> {
 
      - warning: This method cannot be called during a write transaction, or when the containing Realm is read-only.
 
-     - parameter queue: The serial dispatch queue to receive notification on. If
-                        `nil`, notifications are delivered to the current thread.
      - parameter block: The block to be called whenever a change occurs.
      - returns: A token which must be held for as long as you want updates to be delivered.
      */
-    public func observe(on queue: DispatchQueue? = nil,
-                        _ block: @escaping (RealmCollectionChange<LinkingObjects>) -> Void) -> NotificationToken {
-        return rlmResults.addNotificationBlock(wrapObserveBlock(block), queue: queue)
+    public func observe(_ block: @escaping (RealmCollectionChange<LinkingObjects>) -> Void) -> NotificationToken {
+        return rlmResults.addNotificationBlock { _, change, error in
+            block(RealmCollectionChange.fromObjc(value: self, change: change, error: error))
+        }
     }
-
-    // MARK: Frozen Objects
-
-    /// Returns if this collection is frozen.
-    public var isFrozen: Bool { return self.rlmResults.isFrozen }
-
-    /**
-     Returns a frozen (immutable) snapshot of this collection.
-
-     The frozen copy is an immutable collection which contains the same data as this collection
-     currently contains, but will not update when writes are made to the containing Realm. Unlike
-     live collections, frozen collections can be accessed from any thread.
-
-     - warning: This method cannot be called during a write transaction, or when the containing
-     Realm is read-only.
-     - warning: Holding onto a frozen collection for an extended period while performing write
-     transaction on the Realm may result in the Realm file growing to large sizes. See
-     `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
-     */
-    public func freeze() -> LinkingObjects {
-        return LinkingObjects(propertyName: propertyName, handle: handle?.freeze())
-    }
-
-    // MARK: Implementation
-
-    private init(propertyName: String, handle: RLMLinkingObjectsHandle?) {
-        self.propertyName = propertyName
-        self.handle = handle
-    }
-    internal init(objc: RLMResults<AnyObject>) {
-        self.propertyName = ""
-        self.handle = RLMLinkingObjectsHandle(linkingObjects: objc)
-    }
-
-    internal var rlmResults: RLMResults<AnyObject> {
-        return handle?.results ?? RLMResults<AnyObject>.emptyDetached()
-    }
-
-    internal var propertyName: String
-    internal var handle: RLMLinkingObjectsHandle?
 }
 
 extension LinkingObjects: RealmCollection {
@@ -353,12 +370,6 @@ extension LinkingObjects: RealmCollection {
     /// Returns an iterator that yields successive elements in the linking objects.
     public func makeIterator() -> RLMIterator<Element> {
         return RLMIterator(collection: rlmResults)
-    }
-
-    /// :nodoc:
-    // swiftlint:disable:next identifier_name
-    public func _asNSFastEnumerator() -> Any {
-        return rlmResults
     }
 
     // MARK: Collection Support
@@ -381,11 +392,12 @@ extension LinkingObjects: RealmCollection {
     }
 
     /// :nodoc:
-    // swiftlint:disable:next identifier_name
-    public func _observe(_ queue: DispatchQueue?,
-                         _ block: @escaping (RealmCollectionChange<AnyRealmCollection<Element>>) -> Void)
-        -> NotificationToken {
-            return rlmResults.addNotificationBlock(wrapObserveBlock(block), queue: queue)
+    public func _observe(_ block: @escaping (RealmCollectionChange<AnyRealmCollection<Element>>) -> Void) ->
+        NotificationToken {
+            let anyCollection = AnyRealmCollection(self)
+            return rlmResults.addNotificationBlock { _, change, error in
+                block(RealmCollectionChange.fromObjc(value: anyCollection, change: change, error: error))
+            }
     }
 }
 
@@ -393,11 +405,40 @@ extension LinkingObjects: RealmCollection {
 
 extension LinkingObjects: AssistedObjectiveCBridgeable {
     internal static func bridging(from objectiveCValue: Any, with metadata: Any?) -> LinkingObjects {
-        guard let object = objectiveCValue as? RLMResults<Element> else { preconditionFailure() }
-        return LinkingObjects<Element>(objc: object as! RLMResults<AnyObject>)
+        guard let metadata = metadata as? LinkingObjectsBridgingMetadata else { preconditionFailure() }
+
+        let swiftValue = LinkingObjects(fromType: Element.self, property: metadata.propertyName)
+        switch (objectiveCValue, metadata) {
+        case (let object as RLMObjectBase, .uncached(let property)):
+            swiftValue.object = RLMWeakObjectHandle(object: object)
+            swiftValue.property = property
+        case (let results as RLMResults<AnyObject>, .cached):
+            swiftValue.cachedRLMResults = results
+        default:
+            preconditionFailure()
+        }
+        return swiftValue
     }
 
     internal var bridged: (objectiveCValue: Any, metadata: Any?) {
-        return (objectiveCValue: handle!.results, metadata: nil)
+        if let results = cachedRLMResults {
+            return (objectiveCValue: results,
+                    metadata: LinkingObjectsBridgingMetadata.cached(propertyName: propertyName))
+        } else {
+            return (objectiveCValue: (object!.copy() as! RLMWeakObjectHandle).object,
+                    metadata: LinkingObjectsBridgingMetadata.uncached(property: property!))
+        }
+    }
+}
+
+internal enum LinkingObjectsBridgingMetadata {
+    case uncached(property: RLMProperty)
+    case cached(propertyName: String)
+
+    fileprivate var propertyName: String {
+        switch self {
+        case .uncached(let property):   return property.name
+        case .cached(let propertyName): return propertyName
+        }
     }
 }

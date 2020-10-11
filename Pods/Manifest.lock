@@ -2,12 +2,12 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
-  - ChromaColorPicker (2.0.2)
-  - Realm (5.4.8):
-    - Realm/Headers (= 5.4.8)
-  - Realm/Headers (5.4.8)
-  - RealmSwift (5.4.8):
-    - Realm (= 5.4.8)
+  - ChromaColorPicker (1.8.0)
+  - Realm (3.20.0):
+    - Realm/Headers (= 3.20.0)
+  - Realm/Headers (3.20.0)
+  - RealmSwift (3.20.0):
+    - Realm (= 3.20.0)
   - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
@@ -34,11 +34,11 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  ChromaColorPicker: 307585f2dc23d4d72f24cad320c1e08825cb5c09
-  Realm: 042bbb59227a0159eda397b8a5a49fbd67495ce7
-  RealmSwift: 15ddd6b3398ebfc99810811c44f095df1313adb3
+  ChromaColorPicker: 2e47f5acb805d53350fb7af1b511bc534b38ee31
+  Realm: 8b2ca5bc6479a91f379b6b42b5922e396cd5ba5a
+  RealmSwift: 1949ef26a279e1845bd51d591b9103adfcd121df
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: 9cd569867886e820c304b8b3519534d0a46e633f
+PODFILE CHECKSUM: 986924e99d8ff03d92d354b4b5e6a26a980c584d
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.8.4

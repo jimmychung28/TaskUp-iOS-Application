@@ -39,7 +39,7 @@ namespace realm {
 class SyncUser;
 class SyncSession;
 
-using ChangesetTransformer = sync::ClientReplication::ChangesetCooker;
+using ChangesetTransformer = sync::ClientHistory::ChangesetCooker;
 
 enum class SyncSessionStopPolicy;
 
@@ -108,8 +108,7 @@ struct SyncError {
         return (error_code == ProtocolError::bad_server_file_ident
                 || error_code == ProtocolError::bad_client_file_ident
                 || error_code == ProtocolError::bad_server_version
-                || error_code == ProtocolError::diverging_histories
-                || error_code == ProtocolError::client_file_expired);
+                || error_code == ProtocolError::diverging_histories);
     }
 };
 
@@ -143,8 +142,7 @@ struct SyncConfig {
     bool is_partial = false;
     util::Optional<std::string> custom_partial_sync_identifier;
 
-    // If true, upload/download waits are canceled on any sync error and not just fatal ones
-    bool cancel_waits_on_nonfatal_error = false;
+    bool validate_sync_history = true;
 
     util::Optional<std::string> authorization_header_name;
     std::map<std::string, std::string> custom_http_headers;

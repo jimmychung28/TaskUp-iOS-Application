@@ -78,13 +78,22 @@ extension Int64: AddableType {}
 
  Results instances cannot be directly instantiated.
  */
-public struct Results<Element: RealmCollectionValue>: Equatable {
+public final class Results<Element: RealmCollectionValue>: NSObject, NSFastEnumeration {
 
     internal let rlmResults: RLMResults<AnyObject>
 
     /// A human-readable description of the objects represented by the results.
-    public var description: String {
+    public override var description: String {
         return RLMDescriptionWithMaxDepth("Results", rlmResults, RLMDescriptionMaxDepth)
+    }
+
+    // MARK: Fast Enumeration
+
+    /// :nodoc:
+    public func countByEnumerating(with state: UnsafeMutablePointer<NSFastEnumerationState>,
+                                   objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>,
+                                   count len: Int) -> Int {
+        return Int(rlmResults.countByEnumerating(with: state, objects: buffer, count: UInt(len)))
     }
 
     /// The type of the objects described by the results.
@@ -111,9 +120,6 @@ public struct Results<Element: RealmCollectionValue>: Equatable {
     internal init(_ rlmResults: RLMResults<AnyObject>) {
         self.rlmResults = rlmResults
     }
-    internal init(objc rlmResults: RLMResults<AnyObject>) {
-        self.rlmResults = rlmResults
-    }
 
     // MARK: Index Retrieval
 
@@ -131,6 +137,16 @@ public struct Results<Element: RealmCollectionValue>: Equatable {
      */
     public func index(matching predicate: NSPredicate) -> Int? {
         return notFoundToNil(index: rlmResults.indexOfObject(with: predicate))
+    }
+
+    /**
+     Returns the index of the first object matching the predicate, or `nil` if no objects match.
+
+     - parameter predicateFormat: A predicate format string, optionally followed by a variable number of arguments.
+     */
+    public func index(matching predicateFormat: String, _ args: Any...) -> Int? {
+        return notFoundToNil(index: rlmResults.indexOfObject(with: NSPredicate(format: predicateFormat,
+                                                                               argumentArray: unwrapOptionals(in: args))))
     }
 
     // MARK: Object Retrieval
@@ -158,7 +174,7 @@ public struct Results<Element: RealmCollectionValue>: Equatable {
 
      - parameter key: The name of the property whose values are desired.
      */
-    public func value(forKey key: String) -> Any? {
+    public override func value(forKey key: String) -> Any? {
         return value(forKeyPath: key)
     }
 
@@ -167,7 +183,7 @@ public struct Results<Element: RealmCollectionValue>: Equatable {
 
      - parameter keyPath: The key path to the property whose values are desired.
      */
-    public func value(forKeyPath keyPath: String) -> Any? {
+    public override func value(forKeyPath keyPath: String) -> Any? {
         return rlmResults.value(forKeyPath: keyPath)
     }
 
@@ -180,11 +196,21 @@ public struct Results<Element: RealmCollectionValue>: Equatable {
      - parameter value: The object value.
      - parameter key:   The name of the property whose value should be set on each object.
      */
-    public func setValue(_ value: Any?, forKey key: String) {
+    public override func setValue(_ value: Any?, forKey key: String) {
         return rlmResults.setValue(value, forKeyPath: key)
     }
 
     // MARK: Filtering
+
+    /**
+     Returns a `Results` containing all objects matching the given predicate in the collection.
+
+     - parameter predicateFormat: A predicate format string, optionally followed by a variable number of arguments.
+     */
+    public func filter(_ predicateFormat: String, _ args: Any...) -> Results<Element> {
+        return Results<Element>(rlmResults.objects(with: NSPredicate(format: predicateFormat,
+                                                                     argumentArray: unwrapOptionals(in: args))))
+    }
 
     /**
      Returns a `Results` containing all objects matching the given predicate in the collection.
@@ -302,10 +328,9 @@ public struct Results<Element: RealmCollectionValue>: Equatable {
      not perform a write transaction on the same thread or explicitly call `realm.refresh()`, accessing it will never
      perform blocking work.
 
-     If no queue is given, notifications are delivered via the standard run loop, and so can't be delivered while the
-     run loop is blocked by other activity. If a queue is given, notifications are delivered to that queue instead. When
-     notifications can't be delivered instantly, multiple notifications may be coalesced into a single notification.
-     This can include the notification with the initial collection.
+     Notifications are delivered via the standard run loop, and so can't be delivered while the run loop is blocked by
+     other activity. When notifications can't be delivered instantly, multiple notifications may be coalesced into a
+     single notification. This can include the notification with the initial collection.
 
      For example, the following code performs a write transaction immediately after adding the notification block, so
      there is no opportunity for the initial notification to be delivered first. As a result, the initial notification
@@ -340,24 +365,13 @@ public struct Results<Element: RealmCollectionValue>: Equatable {
 
      - warning: This method cannot be called during a write transaction, or when the containing Realm is read-only.
 
-     - parameter queue: The serial dispatch queue to receive notification on. If
-                        `nil`, notifications are delivered to the current thread.
      - parameter block: The block to be called whenever a change occurs.
      - returns: A token which must be held for as long as you want updates to be delivered.
      */
-    public func observe(on queue: DispatchQueue? = nil,
-                        _ block: @escaping (RealmCollectionChange<Results>) -> Void) -> NotificationToken {
-        return rlmResults.addNotificationBlock(wrapObserveBlock(block), queue: queue)
-    }
-
-    // MARK: Frozen Objects
-
-    public var isFrozen: Bool {
-        return rlmResults.isFrozen
-    }
-
-    public func freeze() -> Results {
-        return Results(rlmResults.freeze())
+    public func observe(_ block: @escaping (RealmCollectionChange<Results>) -> Void) -> NotificationToken {
+        return rlmResults.addNotificationBlock { _, change, error in
+            block(RealmCollectionChange.fromObjc(value: self, change: change, error: error))
+        }
     }
 }
 
@@ -367,13 +381,6 @@ extension Results: RealmCollection {
     /// Returns a `RLMIterator` that yields successive elements in the results.
     public func makeIterator() -> RLMIterator<Element> {
         return RLMIterator(collection: rlmResults)
-    }
-
-    /// :nodoc:
-    // swiftlint:disable:next identifier_name
-    public func _asNSFastEnumerator() -> Any {
-        return rlmResults
-
     }
 
     // MARK: Collection Support
@@ -391,28 +398,30 @@ extension Results: RealmCollection {
     public func index(before i: Int) -> Int { return i - 1 }
 
     /// :nodoc:
-    // swiftlint:disable:next identifier_name
-    public func _observe(_ queue: DispatchQueue?,
-                         _ block: @escaping (RealmCollectionChange<AnyRealmCollection<Element>>) -> Void)
-        -> NotificationToken {
-            return rlmResults.addNotificationBlock(wrapObserveBlock(block), queue: queue)
+    public func _observe(_ block: @escaping (RealmCollectionChange<AnyRealmCollection<Element>>) -> Void) ->
+        NotificationToken {
+        let anyCollection = AnyRealmCollection(self)
+        return rlmResults.addNotificationBlock { _, change, error in
+            block(RealmCollectionChange.fromObjc(value: anyCollection, change: change, error: error))
+        }
     }
 }
 
 // MARK: AssistedObjectiveCBridgeable
 
 extension Results: AssistedObjectiveCBridgeable {
-    internal static func bridging(from objectiveCValue: Any, with metadata: Any?) -> Results {
+    static func bridging(from objectiveCValue: Any, with metadata: Any?) -> Results {
         return Results(objectiveCValue as! RLMResults)
     }
 
-    internal var bridged: (objectiveCValue: Any, metadata: Any?) {
+    var bridged: (objectiveCValue: Any, metadata: Any?) {
         return (objectiveCValue: rlmResults, metadata: nil)
     }
 }
 
 // MARK: - Codable
 
+#if swift(>=4.1)
 extension Results: Encodable where Element: Encodable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
@@ -421,3 +430,4 @@ extension Results: Encodable where Element: Encodable {
         }
     }
 }
+#endif
