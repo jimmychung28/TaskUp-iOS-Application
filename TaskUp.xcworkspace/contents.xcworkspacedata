@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/jimmychung/Library/Mobile Documents/com~apple~CloudDocs/Todoey/TaskUp.xcodeproj">
+      location = "group:TaskUp.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
