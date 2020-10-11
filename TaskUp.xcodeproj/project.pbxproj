@@ -18,7 +18,7 @@
 		17CFD1C52267F2CE008180CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17CFD1C32267F2CE008180CA /* Main.storyboard */; };
 		17CFD1C72267F2CF008180CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17CFD1C62267F2CF008180CA /* Assets.xcassets */; };
 		17CFD1D22267F9C3008180CA /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CFD1D12267F9C3008180CA /* TodoListViewController.swift */; };
-		915864FB637C9FFACF7CBD24 /* Pods_Todoey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3C9AC467C367562FEAADDB /* Pods_Todoey.framework */; };
+		CBCB5AF5B4501D765ACC7D75 /* Pods_TaskUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFFE2EA2402D27C0968F738A /* Pods_TaskUp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +35,9 @@
 		17CFD1C62267F2CF008180CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		17CFD1CB2267F2CF008180CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17CFD1D12267F9C3008180CA /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
-		58B1C846DECF0BC9DC1B1618 /* Pods-Todoey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todoey.release.xcconfig"; path = "Target Support Files/Pods-Todoey/Pods-Todoey.release.xcconfig"; sourceTree = "<group>"; };
-		BE3C9AC467C367562FEAADDB /* Pods_Todoey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Todoey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D765EA4FCDC91FFBF2AF2628 /* Pods-Todoey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todoey.debug.xcconfig"; path = "Target Support Files/Pods-Todoey/Pods-Todoey.debug.xcconfig"; sourceTree = "<group>"; };
+		24165C7918C7117A26468A31 /* Pods-TaskUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskUp.release.xcconfig"; path = "Target Support Files/Pods-TaskUp/Pods-TaskUp.release.xcconfig"; sourceTree = "<group>"; };
+		8C615838C69CD5F7517E6CD1 /* Pods-TaskUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskUp.debug.xcconfig"; path = "Target Support Files/Pods-TaskUp/Pods-TaskUp.debug.xcconfig"; sourceTree = "<group>"; };
+		AFFE2EA2402D27C0968F738A /* Pods_TaskUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				915864FB637C9FFACF7CBD24 /* Pods_Todoey.framework in Frameworks */,
+				CBCB5AF5B4501D765ACC7D75 /* Pods_TaskUp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +96,7 @@
 				17CFD1BE2267F2CE008180CA /* TaskUP */,
 				17CFD1BD2267F2CE008180CA /* Products */,
 				6567571BEAAEB6D5336D08D2 /* Pods */,
-				A406456D09445ECC4E078404 /* Frameworks */,
+				80187742710B017DB55A7D82 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,16 +124,16 @@
 		6567571BEAAEB6D5336D08D2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D765EA4FCDC91FFBF2AF2628 /* Pods-Todoey.debug.xcconfig */,
-				58B1C846DECF0BC9DC1B1618 /* Pods-Todoey.release.xcconfig */,
+				8C615838C69CD5F7517E6CD1 /* Pods-TaskUp.debug.xcconfig */,
+				24165C7918C7117A26468A31 /* Pods-TaskUp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		A406456D09445ECC4E078404 /* Frameworks */ = {
+		80187742710B017DB55A7D82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BE3C9AC467C367562FEAADDB /* Pods_Todoey.framework */,
+				AFFE2EA2402D27C0968F738A /* Pods_TaskUp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,11 +145,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17CFD1CE2267F2CF008180CA /* Build configuration list for PBXNativeTarget "TaskUp" */;
 			buildPhases = (
-				A34A749B333E64563DB787D3 /* [CP] Check Pods Manifest.lock */,
+				F03A0390091C5DBCC47481BC /* [CP] Check Pods Manifest.lock */,
 				17CFD1B82267F2CE008180CA /* Sources */,
 				17CFD1B92267F2CE008180CA /* Frameworks */,
 				17CFD1BA2267F2CE008180CA /* Resources */,
-				23872D663985A38320544B02 /* [CP] Embed Pods Frameworks */,
+				B460EE6B0A77B125F2220ED5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -167,7 +167,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Jimmy Chung";
 				TargetAttributes = {
 					17CFD1BB2267F2CE008180CA = {
@@ -207,24 +207,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		23872D663985A38320544B02 /* [CP] Embed Pods Frameworks */ = {
+		B460EE6B0A77B125F2220ED5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Todoey/Pods-Todoey-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-TaskUp/Pods-TaskUp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Todoey/Pods-Todoey-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-TaskUp/Pods-TaskUp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Todoey/Pods-Todoey-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TaskUp/Pods-TaskUp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A34A749B333E64563DB787D3 /* [CP] Check Pods Manifest.lock */ = {
+		F03A0390091C5DBCC47481BC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -239,7 +239,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Todoey-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-TaskUp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -304,6 +304,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -365,6 +366,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -396,14 +398,14 @@
 		};
 		17CFD1CF2267F2CF008180CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D765EA4FCDC91FFBF2AF2628 /* Pods-Todoey.debug.xcconfig */;
+			baseConfigurationReference = 8C615838C69CD5F7517E6CD1 /* Pods-TaskUp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TWY34R7BG2;
 				INFOPLIST_FILE = "$(SRCROOT)/TaskUP/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -418,14 +420,14 @@
 		};
 		17CFD1D02267F2CF008180CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58B1C846DECF0BC9DC1B1618 /* Pods-Todoey.release.xcconfig */;
+			baseConfigurationReference = 24165C7918C7117A26468A31 /* Pods-TaskUp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TWY34R7BG2;
 				INFOPLIST_FILE = "$(SRCROOT)/TaskUP/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

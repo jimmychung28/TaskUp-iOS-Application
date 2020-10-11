@@ -1,0 +1,6 @@
+framework module Pods_TaskUp {
+  umbrella header "Pods-TaskUp-umbrella.h"
+
+  export *
+  module * { export * }
+}

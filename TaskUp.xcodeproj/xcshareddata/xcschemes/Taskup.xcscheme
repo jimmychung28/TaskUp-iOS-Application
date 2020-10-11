@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1200"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "17CFD1BB2267F2CE008180CA"
-               BuildableName = "Todoey.app"
-               BlueprintName = "Todoey"
-               ReferencedContainer = "container:Todoey.xcodeproj">
+               BuildableName = "TaskUp.app"
+               BlueprintName = "TaskUp"
+               ReferencedContainer = "container:TaskUp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,17 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "17CFD1BB2267F2CE008180CA"
-            BuildableName = "Todoey.app"
-            BlueprintName = "Todoey"
-            ReferencedContainer = "container:Todoey.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -56,13 +45,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "17CFD1BB2267F2CE008180CA"
-            BuildableName = "Todoey.app"
-            BlueprintName = "Todoey"
-            ReferencedContainer = "container:Todoey.xcodeproj">
+            BuildableName = "TaskUp.app"
+            BlueprintName = "TaskUp"
+            ReferencedContainer = "container:TaskUp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -75,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "17CFD1BB2267F2CE008180CA"
-            BuildableName = "Todoey.app"
-            BlueprintName = "Todoey"
-            ReferencedContainer = "container:Todoey.xcodeproj">
+            BuildableName = "TaskUp.app"
+            BlueprintName = "TaskUp"
+            ReferencedContainer = "container:TaskUp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

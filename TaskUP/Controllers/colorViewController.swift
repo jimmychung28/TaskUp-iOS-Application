@@ -15,6 +15,7 @@ protocol colorViewControllerDelegate {
 class colorViewController: UIViewController,ChromaColorPickerDelegate {
     var delegate:colorViewControllerDelegate?
     var path:IndexPath?
+    
     func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
         delegate?.changeColor(color:colorPicker.currentColor,indexPath:path!)
         self.dismiss(animated: true, completion: nil)
