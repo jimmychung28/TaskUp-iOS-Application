@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="08A-jf-VPv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="08A-jf-VPv">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Categories-->
         <scene sceneID="YsZ-tA-pm1">
             <objects>
-                <tableViewController id="WSG-XD-fea" customClass="CategoryViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="WSG-XD-fea" customClass="CategoryViewController" customModule="TaskUp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DZP-c0-iXT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,7 +65,7 @@
         <!--Info View Controller-->
         <scene sceneID="ulb-dx-OwW">
             <objects>
-                <viewController id="jIO-X9-3pk" customClass="InfoViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jIO-X9-3pk" customClass="InfoViewController" customModule="TaskUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VRC-Ad-unZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="3266"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -75,7 +76,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lg-2e-QxQ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="3150"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zz1-gL-fBe">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zz1-gL-fBe">
                                                 <rect key="frame" x="140" y="18" width="95" height="30"/>
                                                 <state key="normal" title="Privacy Policy">
                                                     <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -128,7 +129,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How To Add Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJH-na-aQS">
-                                                <rect key="frame" x="65.5" y="56" width="244" height="29"/>
+                                                <rect key="frame" x="66" y="56" width="243" height="29"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -287,6 +288,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="9eE-BC-QAp"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="P9k-W8-7O0" firstAttribute="top" secondItem="9eE-BC-QAp" secondAttribute="top" id="nYh-DS-Nzb"/>
@@ -294,7 +296,6 @@
                             <constraint firstItem="P9k-W8-7O0" firstAttribute="trailing" secondItem="9eE-BC-QAp" secondAttribute="trailing" id="tbm-OT-aDh"/>
                             <constraint firstItem="P9k-W8-7O0" firstAttribute="bottom" secondItem="9eE-BC-QAp" secondAttribute="bottom" constant="351" id="xbi-b3-xo9"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="9eE-BC-QAp"/>
                     </view>
                     <size key="freeformSize" width="375" height="3266"/>
                     <connections>
@@ -309,7 +310,7 @@
         <!--Tasks-->
         <scene sceneID="cG8-aD-CLV">
             <objects>
-                <tableViewController id="pkE-88-d2U" customClass="TodoListViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="pkE-88-d2U" customClass="TodoListViewController" customModule="TaskUp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xWi-VY-f4b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -335,14 +336,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AQI-zv-RU8">
-                                            <rect key="frame" x="16" y="15" width="47" height="30"/>
+                                            <rect key="frame" x="16" y="15" width="46.5" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1jb-8W-jAC">
-                                            <rect key="frame" x="225.5" y="22" width="46.5" height="21.5"/>
+                                            <rect key="frame" x="226" y="22" width="46" height="21.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
@@ -384,33 +385,47 @@
         <!--Color View Controller-->
         <scene sceneID="pOx-bV-try">
             <objects>
-                <viewController id="YiF-rM-B41" customClass="colorViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="YiF-rM-B41" customClass="colorViewController" customModule="TaskUp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jcd-iO-Dhs">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eh8-Xe-w97">
-                                <rect key="frame" x="237" y="0.0" width="67" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eh8-Xe-w97">
+                                <rect key="frame" x="227" y="0.0" width="77" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="Cancel">
+                                <state key="normal" title="Confirm">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="doneButtonPressed:" destination="YiF-rM-B41" eventType="touchUpInside" id="ovz-FQ-oz2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1O-EN-AxV">
+                                <rect key="frame" x="16" y="0.0" width="67" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" systemColor="systemBlueColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonPressed:" destination="YiF-rM-B41" eventType="touchUpInside" id="tQ5-aW-KS9"/>
+                                </connections>
+                            </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="H7G-UC-62B"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Eh8-Xe-w97" firstAttribute="trailing" secondItem="Jcd-iO-Dhs" secondAttribute="trailingMargin" id="4EA-KR-9bP"/>
+                            <constraint firstItem="q1O-EN-AxV" firstAttribute="leading" secondItem="Jcd-iO-Dhs" secondAttribute="leading" constant="16" id="V5b-WY-UcE"/>
                             <constraint firstItem="Eh8-Xe-w97" firstAttribute="top" secondItem="H7G-UC-62B" secondAttribute="top" id="aCy-ss-r5d"/>
+                            <constraint firstItem="q1O-EN-AxV" firstAttribute="top" secondItem="H7G-UC-62B" secondAttribute="top" id="pP3-mL-0yR"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="H7G-UC-62B"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpm-lK-Quc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2511" y="1106"/>
+            <point key="canvasLocation" x="2510.625" y="1105.9859154929577"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SK0-El-rXM">
@@ -439,6 +454,7 @@
             <point key="canvasLocation" x="853.60000000000002" y="132.68365817091455"/>
         </scene>
     </scenes>
+    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.00.20 copy" width="1242" height="2688"/>
         <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 05.09.29" width="1242" height="2688"/>
@@ -450,6 +466,8 @@
         <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.57.17" width="1242" height="2688"/>
         <image name="Simulator Screen Shot - iPhone Xs Max - 2019-05-09 at 15.58.23 copy" width="1242" height="2688"/>
         <image name="info" width="30" height="30"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
-    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

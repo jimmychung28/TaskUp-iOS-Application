@@ -25,11 +25,13 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
         tableView.reloadData()
     }
     
+    
     var orderNumber=0;
     let realm = try! Realm()
     var categoryArray: Results<Category>?
     var center=UNUserNotificationCenter.current()
     var changeColorIndexPath:IndexPath?
+    var changeColorCurrentColor: UIColor?
     var text:UITextView?
 
     
@@ -48,7 +50,7 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
         center.requestAuthorization(options: [.alert,.sound]) { (granted, error) in
             
         }
-        //loadCategories()
+        
         tableView.separatorStyle = .none
         if #available(iOS 13.0, *){
             let app=UINavigationBarAppearance();
@@ -209,8 +211,7 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
             let destinationVC=segue.destination as! colorViewController
             destinationVC.delegate=self
             destinationVC.path=changeColorIndexPath
-            
-            
+            destinationVC.currentColor=changeColorCurrentColor
         }
         
     }
@@ -227,8 +228,8 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
             let alert=UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             let changeColorAction=UIAlertAction(title: "Change Color", style: .default) { (action) in
                 self.changeColorIndexPath=indexPath
+                self.changeColorCurrentColor=UIColor(hexString: self.categoryArray?[indexPath.row].backgroundColor ?? "ffffff")
                 self.performSegue(withIdentifier: "colorSegue", sender: self)
-                
             }
             let changeNameAction=UIAlertAction(title: "Change Name", style: .default) { (action) in
                 self.changeName(indexPath: indexPath);

@@ -12,40 +12,81 @@ import ChromaColorPicker
 protocol colorViewControllerDelegate {
     func changeColor(color:UIColor,indexPath:IndexPath)
 }
+
 class colorViewController: UIViewController,ChromaColorPickerDelegate {
+    
+    
     var delegate:colorViewControllerDelegate?
     var path:IndexPath?
     
-    func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
-        delegate?.changeColor(color:colorPicker.currentColor,indexPath:path!)
+    var currentColor: UIColor?
+    
+    let colorPicker = ChromaColorPicker()
+    let brightnessSlider = ChromaBrightnessSlider()
+    
+
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-
     @IBAction func doneButtonPressed(_ sender: UIButton) {
+        delegate?.changeColor(color:currentColor!,indexPath:path!)
         self.dismiss(animated: true, completion: nil)
     }
+    
+    private func setupColorPicker() {
+        colorPicker.delegate = self
+        colorPicker.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(colorPicker)
+        
+        let verticalOffset = -defaultColorPickerSize.height / 6
+        
+        NSLayoutConstraint.activate([
+            colorPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            colorPicker.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: verticalOffset),
+            colorPicker.widthAnchor.constraint(equalToConstant: self.view.frame.size.width-50),
+            colorPicker.heightAnchor.constraint(equalToConstant: self.view.frame.size.width-50)
+        ])
+    }
+    
+    private func setupBrightnessSlider() {
+        brightnessSlider.connect(to: colorPicker)
+        
+        // Style
+        brightnessSlider.trackColor = UIColor.blue
+        brightnessSlider.handle.borderWidth = 3.0 // Example of customizing the handle's properties.
+        
+        // Layout
+        brightnessSlider.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(brightnessSlider)
+        
+        NSLayoutConstraint.activate([
+            brightnessSlider.centerXAnchor.constraint(equalTo: colorPicker.centerXAnchor),
+            brightnessSlider.topAnchor.constraint(equalTo: colorPicker.bottomAnchor, constant: 28),
+            brightnessSlider.widthAnchor.constraint(equalTo: colorPicker.widthAnchor, multiplier: 0.9),
+            brightnessSlider.heightAnchor.constraint(equalTo: brightnessSlider.widthAnchor, multiplier: brightnessSliderWidthHeightRatio)
+        ])
+    }
+    
+    private func setupColorPickerHandles() {
+
+        colorPicker.addHandle(at: currentColor)
+    }
+    
+    func colorPickerHandleDidChange(_ colorPicker: ChromaColorPicker, handle: ChromaColorHandle, to color: UIColor) {
+        currentColor = color
+        // Here I can detect when the color is too bright to show a white icon
+        // on the handle and change its tintColor.
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let neatColorPicker = ChromaColorPicker(frame: CGRect(x: self.view.frame.size.width/2-(self.view.frame.size.width-50)/2, y: self.view.frame.size.height/2-(self.view.frame.size.width-50)/2, width: self.view.frame.size.width-50, height: self.view.frame.size.width-50))
-        neatColorPicker.delegate = self //ChromaColorPickerDelegate
-        neatColorPicker.padding = 5
-        neatColorPicker.stroke = 3
-        neatColorPicker.hexLabel.textColor = UIColor.white
-        
-        view.addSubview(neatColorPicker)
-        // Do any additional setup after loading the view.
+        setupColorPicker()
+        setupBrightnessSlider()
+        setupColorPickerHandles()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    private let defaultColorPickerSize = CGSize(width: 320, height: 320)
+    private let brightnessSliderWidthHeightRatio: CGFloat = 0.1
 
 }
