@@ -51,6 +51,7 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
             
         }
         
+
         tableView.separatorStyle = .none
         if #available(iOS 13.0, *){
             let app=UINavigationBarAppearance();
@@ -173,6 +174,15 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
         }catch{
             print("Error saving context \(error)")
         }
+        if let count = categoryArray?.count {
+            if count < 2 {
+                editButton.isEnabled = false
+                editButton.title = nil
+            } else {
+                editButton.isEnabled = true
+                editButton.title = "Rearrange"
+            }
+        }
         self.tableView.reloadData()
     }
     func loadCategories(){
@@ -185,6 +195,16 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
             text!.isEditable=false
             text!.font = .systemFont(ofSize:30)
             self.navigationController?.view.addSubview(text!)
+        }
+        
+        if let count = categoryArray?.count {
+            if count < 2 {
+                editButton.isEnabled = false
+                editButton.title = nil
+            } else {
+                editButton.isEnabled = true
+                editButton.title = "Rearrange"
+            }
         }
         
     }
@@ -272,6 +292,16 @@ class CategoryViewController: SwipeTableViewController,colorViewControllerDelega
                                 text!.isEditable=false
                                 text!.font = .systemFont(ofSize:30)
                                 self.navigationController?.view.addSubview(text!)
+                            }
+                        
+                            if let count = categoryArray?.count {
+                                if count < 2 {
+                                    editButton.isEnabled = false
+                                    editButton.title = nil
+                                } else {
+                                    editButton.isEnabled = true
+                                    editButton.title = "Rearrange"
+                                }
                             }
                         }catch{
                            print("Error deleting category,\(error)")

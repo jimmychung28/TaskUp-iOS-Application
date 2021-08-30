@@ -228,6 +228,16 @@ class TodoListViewController: SwipeTableViewController{
                 }catch{
                     print("Error saving new Task, \(error)")
                 }
+                if let count = self.todoItems?.count {
+                    if count < 2 {
+                        self.editButton.isEnabled = false
+                        self.editButton.title = nil
+                    } else {
+                        self.editButton.isEnabled = true
+                        self.editButton.title = "Rearrange"
+                    }
+                }
+                
                 self.tableView.reloadData()
                 self.text?.removeFromSuperview()
             }
@@ -241,6 +251,11 @@ class TodoListViewController: SwipeTableViewController{
         }
         alert.addTextField { (alertDateField) in
             alertDateField.placeholder = "Date to complete task"
+            if #available(iOS 13.4, *) {
+                self.datePicker.preferredDatePickerStyle = .wheels
+                self.datePicker.sizeToFit()
+            }
+            
             self.datePicker.datePickerMode = .dateAndTime
             self.dateField=alertDateField
             
@@ -324,6 +339,11 @@ class TodoListViewController: SwipeTableViewController{
        
         alert.addTextField { (alertDateField) in
             alertDateField.placeholder = "New Date to complete task"
+            if #available(iOS 13.4, *) {
+                self.datePicker.preferredDatePickerStyle = .wheels
+                self.datePicker.sizeToFit()
+            }
+           
             self.datePicker.datePickerMode = .dateAndTime
             self.dateField=alertDateField
             
@@ -357,6 +377,15 @@ class TodoListViewController: SwipeTableViewController{
             text!.font = .systemFont(ofSize:30)
             self.view.addSubview(text!)
         }
+        if let count = todoItems?.count {
+            if count < 2 {
+                editButton.isEnabled = false
+                editButton.title = nil
+            } else {
+                editButton.isEnabled = true
+                editButton.title = "Rearrange"
+            }
+        }
       }
     
     override func updateModel(at indexPath: IndexPath) {
@@ -384,6 +413,15 @@ class TodoListViewController: SwipeTableViewController{
                 text!.isEditable=false
                 text!.font = .systemFont(ofSize:30)
                 self.view.addSubview(text!)
+            }
+            if let count = todoItems?.count {
+                if count < 2 {
+                    editButton.isEnabled = false
+                    editButton.title = nil
+                } else {
+                    editButton.isEnabled = true
+                    editButton.title = "Rearrange"
+                }
             }
         }
     }
